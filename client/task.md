@@ -1,0 +1,1 @@
+language and currency in mobile view

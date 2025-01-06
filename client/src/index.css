@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+*{
+    font-family: gilroy;
+}
+
+/* set scrollbar height and weidth to 0 so that it will be removed from page */
+::-webkit-scrollbar{
+    width: 0px;
+    height:0px;
+    background-color: rgb(134, 40, 196)
+  }
+
