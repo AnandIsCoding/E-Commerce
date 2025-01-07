@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { IoSearchOutline } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdLocalOffer } from "react-icons/md";
 import Carousel from '../components/Carousel';
+import axios from 'axios'
+import ProductCard from '../components/ProductCard';
+import Shimmer from '../components/Shimmer'
+import Pagination from '../components/Pagination';
 
 
-function Home() {
+function Home({animateCategories, setAnimatecategories}) {
+  const [page, setPage] = useState(1)
+  const [allProducts, setAllProducts] = useState([])
+  const getAllProducts = async() =>{
+    try {
+      const res = await axios.get('https://fakestoreapi.com/products')
+      
+      setAllProducts(res.data)
+    } catch (error) {
+      console.log('error in fetch all products => ',error)
+    }
+  }
+
+   useEffect(()=>{
+    getAllProducts()
+   },[])
+
+
   return (
     <div className='w-full h-screen'>
      
@@ -41,11 +62,11 @@ function Home() {
       </div>
 
       {/* categories options */}
-      <div className='w-full  md:px-2 md:justify-center bg-[#41187F]  py-2   text-white flex gap-2 overflow-x-scroll relative '>
-      <h1 className=' px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]'>All</h1>
-        <h1 className=' px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]'>Electronics</h1>
-        <h1 className=' px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]'>Mens</h1>
-        <h1 className=' px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]'>Womens</h1>
+      <div onClick={()=>setAnimatecategories(false)} className='w-full  md:px-2 md:justify-center bg-[#41187F]  py-2   text-white flex gap-2 overflow-x-scroll relative '>
+        <h1 className={`${animateCategories && "animate-bounce"} px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]`}
+>Electronics</h1>
+        <h1 className={`${animateCategories && "animate-bounce"} px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]`}>Mens</h1>
+        <h1 className={`${animateCategories && "animate-bounce"} px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]`}>Womens</h1>
         <h1 className=' px-4 py-2 rounded-lg text-xl flex-shrink-0 cursor-pointer hover:bg-white hover:text-black duration-[0.5s]'>Jewellery</h1>
 
         <h1 className='hidden md:flex bg-white text-black px-4 py-2 rounded-lg text-xl flex-shrink-0 ml-[10%] gap-2 '> <MdLocalOffer size={24} className='mt-1 text-[#41187F]' /> Clearance Up To 20% Off</h1>
@@ -60,50 +81,32 @@ function Home() {
       </div>
 
 
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-      <h1>hii</h1>
-     
-      
+            {/*display all products  */}
+            <div className='w-full flex flex-wrap px-0 md:px-3 py-4 justify-around md:justify-evenly gap-x-0 gap-y-4 md:gap-3 overflow-y-hidden'>
+            {
+              allProducts?.length > 0? allProducts.slice(page*5-5,page*5).map((product,index) => (
+                 <ProductCard product={product} key={index} />              
+                
+              )) : (
+                
+                  Array(10).fill(null).map((item,index) =>{
+                    return <Shimmer key={index} />
+                  })
+                
+              )
+            }
+            </div>
+
+
+            {/* pagination passing allproducts page and setpage function */}
+            <Pagination allProducts={allProducts} page={page} setPage={setPage} />
+            
+
+            <h1>hii</h1>
+            <h1>hii</h1>
+            <h1>hii</h1>
+            <h1>hii</h1>
+            <h1>hii</h1>
 
       
       

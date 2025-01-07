@@ -1,26 +1,43 @@
 [
-    {
-      "id": "0",
-      "author": "Alejandro Escamilla",
-      "width": 5000,
-      "height": 3333,
-      "url": "https://images.unsplash.com/photo-1562347174-7370ad83dc47?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      "id": "1",
-      "author": "Alejandro Escamilla",
-      "width": 5000,
-      "height": 3333,
-      "url": "https://media.gettyimages.com/id/2036001604/photo/a-model-presents-a-creation-by-christian-dior-for-the-women-ready-to-wear-fall-winter-2024.jpg?s=612x612&w=0&k=20&c=aoxsi87GxcX3koQgXBRhfpzftM8v3KpLXwrVdAPcsH8=",
-      "download_url": "https://picsum.photos/id/1/5000/3333"
-    },
-    {
-      "id": "2",
-      "author": "Alejandro Escamilla",
-      "width": 5000,
-      "height": 3333,
-      "url": "https://unsplash.com/photos/N7XodRrbzS0",
-      "download_url": "https://picsum.photos/id/2/5000/3333"
-    }
-  ]
-  
+  {
+    "id": 0,
+    "url": "https://assets.vogue.com/photos/5e66b588f262740008dd16c9/16:9/w_2580,c_limit/00_social%20(1).jpg"
+  },
+  {
+    "id": 1,
+    "url": "https://media.istockphoto.com/id/1299986822/photo/the-bigger-the-hat-the-bigger-the-dreams.jpg?s=612x612&w=0&k=20&c=ebHD1lQbqtj-3RpfR_2ScUo1YHiVIQlDK3AXQjGBmu8="
+  },
+  {
+    "id": 2,
+    "url": "https://media.gettyimages.com/id/2036001604/photo/a-model-presents-a-creation-by-christian-dior-for-the-women-ready-to-wear-fall-winter-2024.jpg?s=612x612&w=0&k=20&c=aoxsi87GxcX3koQgXBRhfpzftM8v3KpLXwrVdAPcsH8="
+  },
+  {
+    "id": 3,
+    "url": "https://media.istockphoto.com/id/1127955890/video/women-beauty-fashion-model-human-face-black-white-fashion-video.jpg?s=640x640&k=20&c=GX5a7Kbw7lxpIo-6D0FYLb_l4xhIMDLPNCq8I_XLSiY="
+  },
+  {
+    "id": 4,
+    "url": "https://www.crematrix.com/blog/wp-content/uploads/2024/01/K-A-N-D-I-V-A-L-I-1-2000x1200.jpg"
+  },
+  {
+    "id": 5,
+    "url": "https://cdn.mos.cms.futurecdn.net/3E6XZEAtuGD2yCDM7UhyXL.jpg"
+  },
+  {
+    "id": 6,
+    "url": "https://m.media-amazon.com/images/M/MV5BNzc2YWQ4ODQtMmQ5Yy00YjdiLTkwNDgtY2VkNDc5NTdjMDAzXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,500,281_.jpg"
+  },
+  {
+    "id": 7,
+    "url": "https://media.vogue.in/wp-content/uploads/2018/11/featured16.jpg"
+  },
+  {
+    "id": 8,
+    "url": "https://assets.telegraphindia.com/telegraph/2024/Oct/1729839537_alia-bhatt-5.jpg"
+  },
+  {
+    "id": 9,
+    "url": "https://s3.ap-south-1.amazonaws.com/modelfactory.in/upload/2021/Mar/07/blog_images/1c438db3f5a6cb8e386b59f0b07b673b.jpg"
+  }
+]
+

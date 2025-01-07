@@ -5,7 +5,7 @@ import { BiSolidUserAccount } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
-function MobileOption() {
+function MobileOption({setAnimatecategories}) {
   return (
     <nav
       aria-label="Mobile Navigation"
@@ -16,7 +16,7 @@ function MobileOption() {
         <p>Home</p>
       </button>
 
-      <button aria-label="Categories">
+      <button aria-label="Categories" onClick={()=>setAnimatecategories(prev => !prev)}>
         <TbTableOptions size={32} aria-hidden="true" />
         <p>Categories</p>
       </button>
