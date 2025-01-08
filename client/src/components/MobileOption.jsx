@@ -4,14 +4,16 @@ import { TbTableOptions } from "react-icons/tb";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
+import {toast} from 'react-hot-toast'
 function MobileOption({setAnimatecategories}) {
+  const navigate = useNavigate()
   return (
     <nav
       aria-label="Mobile Navigation"
       className="fixed bottom-0 left-0 right-0 md:hidden w-full px-2 pt-4 pb-1 text-white bg-[#41187F] z-[1] flex justify-between"
     >
-      <button aria-label="Home">
+      <button aria-label="Home" onClick={()=>navigate('/')}>
         <FaHome size={32} aria-hidden="true" />
         <p>Home</p>
       </button>
@@ -21,17 +23,17 @@ function MobileOption({setAnimatecategories}) {
         <p>Categories</p>
       </button>
 
-      <button aria-label="Account">
+      <button aria-label="Account" onClick={()=>toast.error('Account will be updated soon')}>
         <BiSolidUserAccount size={32} aria-hidden="true" />
         <p>Account</p>
       </button>
 
-      <button aria-label="Cart">
+      <button aria-label="Cart" onClick={()=>navigate('/cart')}>
         <FaCartPlus size={32} aria-hidden="true" />
         <p>Cart</p>
       </button>
 
-      <button aria-label="Wishlist" >
+      <button aria-label="Wishlist" onClick={()=>navigate('/wishlist')}>
         <FaRegHeart size={32} aria-hidden="true"  />
         <p>Wishlist</p>
       </button>

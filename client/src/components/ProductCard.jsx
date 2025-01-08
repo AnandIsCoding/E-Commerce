@@ -1,8 +1,9 @@
 import React from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function ProductCard({product}) {
     // extract all properties from prodyct
-    const {title, category, price, image} = product
+    const {title, category, price, image, id} = product
   return (
     // todo : on card hover, card should slightly up on the y-axis
     <div key={product?.id} className='products  transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0   p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh] ' >
@@ -19,7 +20,7 @@ function ProductCard({product}) {
     </div>
 
     <div className='flex flex-col gap-2'>
-      <button className='w-[100%] px-8 py-3 bg-[#41187F] text-white rounded-lg '>View Product</button>
+      <NavLink to={`/product/${id}`} className='w-[100%] px-8 py-3 bg-[#41187F] text-white text-center rounded-lg '>View Product</NavLink>
       <button className='w-[100%] px-2 py-3 bg-[#41187F] text-white rounded-lg mb-4 '>🛒 Add to Cart</button>
     </div>
      

@@ -1,7 +1,9 @@
 language and currency in mobile view
 
+ search than routing cart and all
 
-axios used
 
+ details page
+cart, wishlist
 
-category , search than routing cart and all
+review in product details page

@@ -12,9 +12,11 @@ import Pagination from '../components/Pagination';
 import WhatWeSell from '../components/WhatWeSell';
 import FAQs from '../components/FAQs';
 import Footer from '../components/Footer';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 function Home({animateCategories, setAnimatecategories}) {
+  const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [allProducts, setAllProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -70,12 +72,12 @@ function Home({animateCategories, setAnimatecategories}) {
         {/* cart */}
 
         <div className='mt-10 hidden md:flex px-10 gap-5 text-[#41187F]'>
-          <button aria-label="Cart">
+          <button aria-label="Cart" onClick={()=>navigate('/cart')}>
                   <FaCartPlus size={28} aria-hidden="true" />
                   <p>Cart</p>
                 </button>
           
-                <button aria-label="Wishlist" >
+                <button aria-label="Wishlist" onClick={()=>navigate('/wishlist')} >
                   <FaRegHeart size={28} aria-hidden="true"  />
                   <p>Wishlist</p>
                 </button>

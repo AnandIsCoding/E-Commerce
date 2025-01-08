@@ -74,7 +74,7 @@ function FAQs() {
               >
                 {/* FAQ title */}
                 <h1 className="text-2xl font-bold relative">
-                  {item.title} <span className="absolute right-2"> + </span>
+                  {item.title} <span className="absolute right-2"> {openIndex === index ? '▬' : '✙'}  </span>
                 </h1>
 
                 {/* FAQ description if openIndex === index than only show otherwise not */}
