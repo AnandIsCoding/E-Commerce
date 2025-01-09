@@ -16,7 +16,7 @@ function Footer() {
               {" "}
               <BsTelephone size={20} className="mt-1" /> Call: +123 456 7890{" "}
             </h1>
-            <h1 className="absolute bottom-2 right-0 left-0 border-2 border-white text-white bg-[#41187F] px-5 py-2 text-lg w-fit rounded-lg">Copyright &copy; AnandClothing Rights Reserved </h1>
+            <h1 className="absolute bottom-2 right-0 left-0  text-white bg-[#41187F] px-5 py-2 text-lg w-fit rounded-lg">Copyright &copy; AnandClothing Rights Reserved </h1>
           </div>
 
         </div>

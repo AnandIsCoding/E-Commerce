@@ -18,7 +18,7 @@ function Navbar() {
         <option value="value3">Future tod</option>
       </select>
 
-      <NavLink to='/signup'  className="hover:cursor-pointer hover:animate-bounce duration-[4s]">Signin / Signup</NavLink>
+      <NavLink to='/signup'  className="cursor-pointer ">Signin / Signup</NavLink>
       </div>
 
       

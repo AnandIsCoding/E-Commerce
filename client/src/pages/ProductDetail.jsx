@@ -4,6 +4,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { FaRegHeart } from "react-icons/fa";
 import MultiStepDescription from "../components/MultiStepDescription";
+import { useDispatch, useSelector } from "react-redux";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { addToCart, removeFromCart } from "../redux/slices/cartSlice";
+import {addToWishlist, removeFromWishlist} from '../redux/slices/wishlistSlice'
+
+import { AiFillInstagram } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -11,6 +19,28 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const cart = useSelector(state => state.cart)
+  const wishlist = useSelector(state => state.wishlist)
+  const dispatch = useDispatch()
+
+   const handleAddToCartBtn = (product) =>{
+     dispatch(addToCart(product))
+     toast.success('Product added to cart successfully')
+   }
+   const handleRemoveFromCartBtn = (id) =>{
+    dispatch(removeFromCart(id))
+    toast.success('Product removed from cart successfully')
+}
+
+const handleAddToWishlistBtn = (product) =>{
+  dispatch(addToWishlist(product))
+  toast.success('Product added to wishlist successfully')
+}
+const handleRemoveFromWishlist = (id) =>{
+  toast.success('Product removed from wishlist successfully')
+  dispatch(removeFromWishlist(id))
+}
 
   const fetchProductDetails = async () => {
     try {
@@ -38,12 +68,12 @@ function ProductDetail() {
   if (error) return toast.error("Failed to load product details");
 
   return (
-    <div className="w-screen  mx-auto p-0 flex flex-col ">
-      <div className=" md:max-h-[40vw]  flex flex-col md:flex-row gap-4">
+    <div className="w-screen  mx-auto p-0 flex flex-col gap-[30vw] lg:gap-4 md:gap-4">
+      <div className=" md:max-h-[40vw]  flex flex-col lg:flex-row gap-6 md:flex-row ">
         {/* Left Section */}
         <div className=" w-full md:w-1/2 flex flex-col md:flex-row">
           {/* Thumbnail List */}
-          <div className="flex  gap-2 overflow-x-auto flex-row md:flex-col md:overflow-y-auto md:h-full p-1 ">
+          <div className="flex gap-4 lg:gap-2 overflow-x-auto lg:flex-col ">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
@@ -136,13 +166,18 @@ function ProductDetail() {
           {/* buttons for cart wishlist etc */}
 
           <div className="w-full flex mt-8  gap-4">
-            <button className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
+            {
+              wishlist.find((i)=>i.id === product.id) ? <button onClick={(id) => handleRemoveFromWishlist(product.id) } className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
+              {" "}
+              🖤 Remove from wishlist
+            </button> : <button onClick={()=> handleAddToWishlistBtn(product)} className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
               {" "}
               🤍 Add to wishlist
             </button>
-            <button className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
-              🛒 Add to Cart
-            </button>
+            }
+            {
+                    cart.find((i)=> i.id === product.id) ? <button onClick={()=> handleRemoveFromCartBtn(product.id)} className='md:w-[33.33%] text-lg px-2 py-3 border-2  border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 flex items-center justify-center gap-2'> <RiDeleteBin6Line/> Remove From Cart</button> : <button onClick={() => handleAddToCartBtn(product)} className='md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4'> 🛒 Add to Cart</button>
+                  }
             <button className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
               ⚖ Add to Compare
             </button>
@@ -157,19 +192,30 @@ function ProductDetail() {
               <p className="text-lg ">{product.category}</p>
             </div>
             <div className="w-[50%] px-4 flex gap-2">
-              <h1 className="text-lg font-semibold flex gap-4">Share :</h1>
-              <span className="text-2xl">ⓕ</span>
-              <span className="text-2xl">𝕏</span>
-              <span className="text-2xl">📧</span>
+              <h1 className='text-xl font-bold'>Share</h1>
+                <div className='flex gap-4'>
+                  <div className='w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer'>
+                    <FaWhatsapp className='text-green-500 w-full h-full object-cover' />
+                  </div>
+                  <div className='w-8 h-8  items-center rounded-full flex justify-center text-white text-xl cursor-pointer '>
+                  <AiFillInstagram className='text-[red] w-full h-full object-cover' />
+                  </div>
+                  <div className='w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer '>
+                  <FaFacebook className='text-[blue] w-full h-full object-cover' />
+                  </div>
+                </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* multi step like */}
-      <div className="w-full pt-2 ">
+      <div className="w-full pt-2 mt-14">
         <MultiStepDescription />
       </div>
+
+      {/* back button in desktop using bom functionality or method histore object's .go method */}
+      <button onClick={()=> window.history.go(-1)} className="absolute top-2 right-2 bg-violet-300 px-8 py-2 rounded-md hidden md:block">Back</button>
     </div>
   );
 }

@@ -13,14 +13,30 @@ import WhatWeSell from '../components/WhatWeSell';
 import FAQs from '../components/FAQs';
 import Footer from '../components/Footer';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function Home({animateCategories, setAnimatecategories}) {
+  const cart = useSelector(state => state.cart)
+  const wishlist = useSelector(state => state.wishlist)
+    // using reduce finding total sum of price of products in cart
+    const [totalCart, setTotalcart] = useState(0)
+    const [totalWishlist, setTotalwishlist] = useState(0)
+    
   const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [allProducts, setAllProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [prompt, setPrompt] = useState('')
+
+  useEffect(()=>{
+      setTotalcart(cart.length)
+  },[cart.length])
+
+  useEffect(()=>{
+     setTotalwishlist(wishlist.length)
+  },[wishlist.length])
+
   const getAllProducts = async() =>{
     try {
       const res = await axios.get('https://fakestoreapi.com/products')      
@@ -71,15 +87,17 @@ function Home({animateCategories, setAnimatecategories}) {
 
         {/* cart */}
 
-        <div className='mt-10 hidden md:flex px-10 gap-5 text-[#41187F]'>
+        <div className='mt-10 hidden md:flex px-10 gap-5 text-[#41187F] relative'>
           <button aria-label="Cart" onClick={()=>navigate('/cart')}>
                   <FaCartPlus size={28} aria-hidden="true" />
-                  <p>Cart</p>
+                  <p>Cart </p>
+                  <span className='text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-24  px-3 py-0 rounded-full' >{totalCart}</span>
                 </button>
           
-                <button aria-label="Wishlist" onClick={()=>navigate('/wishlist')} >
+                <button aria-label="Wishlist relative" onClick={()=>navigate('/wishlist')} >
                   <FaRegHeart size={28} aria-hidden="true"  />
                   <p>Wishlist</p>
+                  <span className='text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-14  px-3 py-0 rounded-full' >{totalWishlist}</span>
                 </button>
         </div>
 
