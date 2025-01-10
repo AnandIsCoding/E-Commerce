@@ -6,6 +6,7 @@ import { FaAnglesRight } from "react-icons/fa6";
 function Pagination({ allProducts, page, setPage }) {
   return (
     <div className="w-full  mb-4 flex items-center md:justify-center md:gap-x-3 mt-10  ">
+   
       <button
         onClick={() => setPage((prev) => (prev <= 1 ? prev : prev - 1))}
         disabled={page <= 1} // Disable if on the first page

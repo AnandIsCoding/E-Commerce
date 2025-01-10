@@ -17,9 +17,18 @@ import { useSelector } from 'react-redux';
 
 
 function Home({animateCategories, setAnimatecategories}) {
-  const cart = useSelector(state => state.cart)
-  const wishlist = useSelector(state => state.wishlist)
-    // using reduce finding total sum of price of products in cart
+  const [cart, setCart] = useState([])
+  
+    // Local state for wishlist
+    const [wishlist, setWishlist] = useState([]);
+  
+    // Fetch wishlist from localStorage on mount
+    useEffect(() => {
+      const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+      setWishlist(storedWishlist);
+      setCart(storedCart);
+    }, []);
     const [totalCart, setTotalcart] = useState(0)
     const [totalWishlist, setTotalwishlist] = useState(0)
     
@@ -27,34 +36,46 @@ function Home({animateCategories, setAnimatecategories}) {
   const [page, setPage] = useState(1)
   const [allProducts, setAllProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
-  const [prompt, setPrompt] = useState('')
 
   useEffect(()=>{
-      setTotalcart(cart.length)
-  },[cart.length])
+      setTotalcart(cart?.length)
+  },[cart?.length])
 
   useEffect(()=>{
-     setTotalwishlist(wishlist.length)
-  },[wishlist.length])
+     setTotalwishlist(wishlist?.length)
+  },[wishlist?.length])
 
   const getAllProducts = async() =>{
     try {
       const res = await axios.get('https://fakestoreapi.com/products')      
       setAllProducts(res.data)
       setFilteredProducts(res.data)
+      //save received set of products in localstorage, in local storage we can't set normal object, we need to convert object to JSON string
+      localStorage.setItem('products',JSON.stringify(res.data))
     } catch (error) {
       console.log('error in fetch all products => ',error)
+      toast.error('Something went wrong')
     }
   }
 
-  const handleInputChange = (event) =>{
-    setPrompt(event.target.value)
-    const filteredProducts = allProducts.filter((product) =>{
-      return product?.title?.toLowerCase().includes(prompt.toLowerCase())
-    })
-    setFilteredProducts(filteredProducts)
-    setPage(1)
-  }
+  // const handleInputChange = (event) =>{
+  //   setPrompt(event.target.value)
+  //   const filteredProducts = allProducts.filter((product) =>{
+  //     return product?.title?.toLowerCase().includes(prompt.toLowerCase())
+  //   })
+  //   setFilteredProducts(filteredProducts)
+  //   setPage(1)
+  // }
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value.toLowerCase();
+    const filtered = allProducts.filter((product) => {
+      return product?.title?.toLowerCase().includes(inputValue);
+    });
+    setFilteredProducts(filtered); // Update filtered list
+    setPage(1); // Reset pagination
+  };
+  
+  
 
    const handleCategory = async(category) =>{
         try {
@@ -65,10 +86,21 @@ function Home({animateCategories, setAnimatecategories}) {
         }
    }
 
-   useEffect(()=>{
-    getAllProducts()
-   },[])
+   useEffect(() => {
+    const savedProducts = localStorage.getItem('products');
+    if (savedProducts) {
+      // If products exist in local storage, use them
+      const parsedProducts = JSON.parse(savedProducts);
+      setAllProducts(parsedProducts);
+      setFilteredProducts(parsedProducts);
+    } else {
+      // If no products in local storage, fetch from API
+      getAllProducts();
+    }
+  }, []);
+  
 
+  
 
   return (
     <div className='w-full h-screen'>
@@ -155,8 +187,8 @@ function Home({animateCategories, setAnimatecategories}) {
             </div>
 
 
-            {/* pagination passing allproducts page and setpage function */}
-            <Pagination allProducts={allProducts} page={page} setPage={setPage} />
+            {/* pagination passing allproducts page and setpage function, passing filteredProducts */}
+            <Pagination allProducts={filteredProducts} page={page} setPage={setPage} />
             
             <WhatWeSell/>
 

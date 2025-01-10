@@ -7,10 +7,13 @@ const wishlistSlice = createSlice({
         addToWishlist : (state,action) => {
             // add to wishlist push action.payload in wishlist array which is initially empty array []
             state.push(action.payload)
+            localStorage.setItem('wishlist', JSON.stringify(state))
         },
         //filter out if action.payload is equal to any element's id, if not equal than return state with those element
         removeFromWishlist : (state, action) =>{
-            return state.filter((i)=> i.id !== action.payload)
+            let filteredWish = state.filter((i)=> i.id !== action.payload)
+            localStorage.setItem('wishlist', JSON.stringify(filteredWish))
+            return filteredWish
         }
     }
 })

@@ -7,7 +7,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Cart() {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cart = JSON.parse(localStorage.getItem('cart'))
   const navigate = useNavigate();
   // using reduce finding total sum of price of products in cart
   const [totalOfproduct, setTotalofproduct] = useState(
@@ -42,6 +42,8 @@ function Cart() {
     { id: "express", label: "Express Shipping (1-2 days)", price: 10 },
     { id: "free", label: "Free Shipping (7-10 days)", price: 0 },
   ];
+
+  console.log(JSON.parse(localStorage.getItem('cart')))
 
   return (
     <div className="bg-black h-screen">

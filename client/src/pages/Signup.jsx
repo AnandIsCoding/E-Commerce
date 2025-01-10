@@ -19,10 +19,12 @@ function Signup() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+  
 
+  // login form controller with basic validation from frontend, when own backend will be integrated validation will also be performed there
   const handleLoginform = (event) => {
     event.preventDefault();
-
+     
     if (!email.trim()) {
       toast.error("Email is required");
       return;
@@ -221,13 +223,7 @@ function Signup() {
         <br></br>
         <br></br>
       </div>
-      {/* <div className='absolute bottom-0 '>
-        <p className="text-[10px] mt-1 leading-tight  ">
-          This site is protected by reCAPTCHA and the{" "}
-          <span className="underline">Google Privacy Policy</span> and{" "}
-          <span className="underline">Terms of Service apply</span>.
-        </p>
-      </div> */}
+     
       {/* back button in desktop using bom functionality or method histore object's .go method */}
       <button onClick={()=> window.history.go(-1)} className="absolute top-2 right-2 bg-violet-300 px-8 py-2 rounded-md hidden md:block">Back</button>
       

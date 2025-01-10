@@ -10,7 +10,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 function Wishlist() {
   // Subscribing to wishlist slice
-  const wishlist = useSelector((state) => state.wishlist);
+  const wishlist = JSON.parse(localStorage.getItem('wishlist'));
   const dispatch = useDispatch();
 
   const handleRemoveFromWishlist = (id) => {
