@@ -85,7 +85,7 @@ You can view the live version of this project here:
 ### Home Page
 ![Home Page](/client/public/home1.png)
 
-### Wishlist Page
+### FAQ Footer
 ![Wishlist Page](/client/public/home2.png)
 
 ### Mobile view
