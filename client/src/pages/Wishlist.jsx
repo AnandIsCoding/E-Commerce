@@ -9,8 +9,9 @@ import { FaFacebook } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 
 function Wishlist() {
-  // Subscribing to wishlist slice
-  const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+   //get wishlist data from localstorage if it's null than []
+
+  const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
   const dispatch = useDispatch();
 
   const handleRemoveFromWishlist = (id) => {
@@ -20,7 +21,7 @@ function Wishlist() {
 
   return (
     <div className='bg-black min-h-screen'>
-      {wishlist.length < 1 ? (
+      {wishlist?.length < 1 ? (
         <div className='absolute w-full h-full flex flex-col gap-5 justify-center items-center px-8 py-5 rounded-xl'>
           <h1 className='text-2xl lg:text-4xl font-bold text-white text-center'>Your Wishlist is empty</h1>
           <NavLink
@@ -35,7 +36,7 @@ function Wishlist() {
           <div className='flex-grow px-6 py-4'>
             <h1 className='text-2xl lg:text-3xl font-bold my-3'>Your Wishlist</h1>
             <div className='space-y-4 overflow-y-auto max-h-[75vh]'>
-              {wishlist.map((item,_) => (
+              {wishlist?.map((item,_) => (
                 <div
                   key={item.id}
                   className='flex flex-col md:flex-row gap-4 p-4 bg-white text-black rounded-lg shadow-md'
