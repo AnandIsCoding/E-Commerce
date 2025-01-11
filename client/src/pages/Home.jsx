@@ -17,18 +17,19 @@ import { useSelector } from 'react-redux';
 
 
 function Home({animateCategories, setAnimatecategories}) {
-  const [cart, setCart] = useState([])
+  const cart = useSelector(state => state.cart) || []
   
     // Local state for wishlist
-    const [wishlist, setWishlist] = useState([]);
+    const wishlist= useSelector(state => state.wishlist);
   
     // Fetch wishlist from localStorage on mount
     useEffect(() => {
       const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
       const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-      setWishlist(storedWishlist);
-      setCart(storedCart);
+      
     }, []);
+    
+    // Add product to cart
     const [totalCart, setTotalcart] = useState(0)
     const [totalWishlist, setTotalwishlist] = useState(0)
     
