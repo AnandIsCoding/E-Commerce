@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//initially if available in localstorage than that otherwise empty []
+const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+
 const cartSlice = createSlice({
   name: "cart",
-  initialState: [],//empty array for cart
+  initialState: storedCart,//empty array for cart
   reducers: {
     addToCart: (state, action) => {
       // state means cart [] push product which will come from action.payload

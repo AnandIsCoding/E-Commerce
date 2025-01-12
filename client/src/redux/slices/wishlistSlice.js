@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
+//initially if available in localstorage than that otherwise empty []
+const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
 const wishlistSlice = createSlice({
     name:'wishlist',
-    initialState:[], //empty cart for wishlist
+    initialState: storedWishlist, //empty cart for wishlist
     reducers:{
         addToWishlist : (state,action) => {
             // add to wishlist push action.payload in wishlist array which is initially empty array []

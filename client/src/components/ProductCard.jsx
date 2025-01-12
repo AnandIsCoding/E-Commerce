@@ -10,39 +10,32 @@ import { IoIosHeart } from "react-icons/io";
 function ProductCard({ product }) {
   const { title, category, price, image, id } = product;
   const dispatch = useDispatch();
- const [cart, setCart] = useState([])
-
+  
+  // Redux state for cart
+  const cart = useSelector((state) => state.cart);  // Access the cart from Redux store
+  
   // Local state for wishlist
   const [wishlist, setWishlist] = useState([]);
 
   // Fetch wishlist from localStorage on mount
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];    
-    setCart(storedCart);
-  }, [cart.length]);
-
-  useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    setWishlist(storedWishlist);
-  }, [wishlist.length]);
-
-
+    if (Array.isArray(storedWishlist)) {
+      setWishlist(storedWishlist);
+    } else {
+      setWishlist([]);
+    }
+  }, []);  // Empty dependency array to run once on mount
 
   // Add to cart handler
   const handleAddToCartBtn = (product) => {
-    dispatch(addToCart(product));
-    const updatedCart = [...cart, product]
-    setCart(updatedCart)
-    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    dispatch(addToCart(product));  // Dispatch action to add to Redux state
     toast.success('Product added to cart successfully');
   };
 
   // Remove from cart handler
   const handleRemoveFromCartBtn = (id) => {
-    dispatch(removeFromCart(id));
-    const updatedCart = cart.filter((i)=>i.id !== id)
-    setCart(updatedCart)
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
+    dispatch(removeFromCart(id));  // Dispatch action to remove from Redux state
     toast.success('Product removed from cart successfully');
   };
 
@@ -50,7 +43,7 @@ function ProductCard({ product }) {
   const handleAddToWishlistBtn = (product) => {
     const updatedWishlist = [...wishlist, product];
     setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // Update localStorage
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
     dispatch(addToWishlist(product));
     toast.success('Product added to wishlist successfully');
   };
@@ -59,10 +52,15 @@ function ProductCard({ product }) {
   const handleRemoveFromWishlist = (id) => {
     const updatedWishlist = wishlist.filter(item => item.id !== id);
     setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // Update localStorage
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
     dispatch(removeFromWishlist(id));
     toast.success('Product removed from wishlist successfully');
   };
+
+  // Sync cart with localStorage whenever the cart changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));  // Sync Redux cart state to localStorage
+  }, [cart.length]);  // Runs whenever the cart state in Redux is updated
 
   return (
     <div key={product?.id} className='products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]'>
@@ -91,7 +89,7 @@ function ProductCard({ product }) {
       <div className='flex flex-col gap-2'>
         <NavLink to={`/product/${id}`} className='w-[100%] px-8 py-3 bg-[#41187F] text-white text-center rounded-lg'>View Product</NavLink>
         {
-          cart.find((i) => i.id === id) ? (
+          cart?.find((i) => i.id === id) ? (
             <button onClick={() => handleRemoveFromCartBtn(product.id)} className='w-[100%] px-2 py-3 bg-[#41187F] text-white rounded-lg mb-4 flex justify-center items-center gap-2'>
               <RiDeleteBin6Line /> Remove From Cart
             </button>
@@ -103,7 +101,7 @@ function ProductCard({ product }) {
         }
       </div>
     </div>
-  )
+  );
 }
 
 export default ProductCard;

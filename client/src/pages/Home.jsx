@@ -16,10 +16,25 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Home({ animateCategories, setAnimatecategories }) {
-  const cart = useSelector((state) => state.cart) || [];
+ 
+    // subscribe to wishlist and cart
+    const cart = useSelector(state => state.cart)
+    const wishlist = useSelector((state) => state.wishlist);
 
-  // Local state for wishlist
-  const wishlist = useSelector((state) => state.wishlist);
+  const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
+  const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
+
+  useEffect(()=>{
+    
+    setInlocal(JSON.parse(localStorage.getItem('cart')))
+    console.log(inlocal)
+  },[cart])
+
+  useEffect(()=>{    
+    setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
+  },[wishlist])
+
+
 
   // Fetch wishlist from localStorage on mount
   useEffect(() => {
@@ -37,11 +52,11 @@ function Home({ animateCategories, setAnimatecategories }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    setTotalcart(cart?.length);
+    setTotalcart(inlocal?.length);
   }, [cart?.length]);
 
   useEffect(() => {
-    setTotalwishlist(wishlist?.length);
+    setTotalwishlist(inLocalWish?.length);
   }, [wishlist?.length]);
 
   const getAllProducts = async () => {
@@ -133,7 +148,7 @@ function Home({ animateCategories, setAnimatecategories }) {
               <FaCartPlus size={28} aria-hidden="true" />
               <p>Cart </p>
               <span className="text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-24  px-3 py-0 rounded-full">
-                {totalCart}
+                {inlocal?.length}
               </span>
             </button>
 
@@ -144,7 +159,7 @@ function Home({ animateCategories, setAnimatecategories }) {
               <FaRegHeart size={28} aria-hidden="true" />
               <p>Wishlist</p>
               <span className="text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-14  px-3 py-0 rounded-full">
-                {totalWishlist}
+                {inLocalWish?.length}
               </span>
             </button>
           </div>
