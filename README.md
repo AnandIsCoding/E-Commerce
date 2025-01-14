@@ -95,7 +95,9 @@ You can view the live version of this project here:
 ![Wishlist Page](/client/public/cartSS.png)
 
 
-## Testing Setup
+## Testing 
+ 
+ ### 2. **E2E Testing and unit testing implemented**
 
 ### 1. **Tools and Libraries Used**
 - **Vitest**: Blazing fast unit testing framework.
