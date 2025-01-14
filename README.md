@@ -105,7 +105,7 @@ You can view the live version of this project here:
 
 
 ### **        Installation**
-Install the necessary dependencies for testing:
+Install the necessary dependencies for testing :
 
 bash
 npm install --save-dev vitest @testing-library/react @testing-library/jest-dom msw
