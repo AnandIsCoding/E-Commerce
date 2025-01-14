@@ -2,7 +2,7 @@ import React from 'react'
 
 function Shimmer() {
   return (
-    <div className='products flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh] '>
+    <div data-testid='shimmercard' className=' products flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh] '>
   {/* Image Shimmer */}
   <div className='w-full h-[50%] rounded-xl bg-gray-300 shimmer'></div>
 

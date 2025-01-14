@@ -14,6 +14,7 @@ import FAQs from "../components/FAQs";
 import Footer from "../components/Footer";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function Home({ animateCategories, setAnimatecategories }) {
  
@@ -27,7 +28,6 @@ function Home({ animateCategories, setAnimatecategories }) {
   useEffect(()=>{
     
     setInlocal(JSON.parse(localStorage.getItem('cart')))
-    console.log(inlocal)
   },[cart])
 
   useEffect(()=>{    
@@ -207,9 +207,9 @@ function Home({ animateCategories, setAnimatecategories }) {
               <ProductCard product={product} key={index} />
             ))
         ) : allProducts.length > 0 ? (
-          <div className="w-full text-center text-lg font-bold text-[#41187F]">
+          <h1 className="w-full text-center text-lg font-bold text-[#41187F]">
             No products found.
-          </div>
+          </h1>
         ) : (
           Array(10)
             .fill(null)

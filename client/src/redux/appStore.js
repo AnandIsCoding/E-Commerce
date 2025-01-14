@@ -6,7 +6,7 @@ import wishlistReducer from '../redux/slices/wishlistSlice'
 
 const appStore = configureStore({
     reducer:{
-        // name of slice : 
+        // name of slice : name of reducer
         cart : cartReducer,
         wishlist : wishlistReducer
     }

@@ -95,6 +95,20 @@ You can view the live version of this project here:
 ![Wishlist Page](/client/public/cartSS.png)
 
 
+## Testing Setup
+
+### 1. **Tools and Libraries Used**
+- **Vitest**: Blazing fast unit testing framework.
+- **React Testing Library**: For testing React components.
+
+
+### **        Installation**
+Install the necessary dependencies for testing:
+
+bash
+npm install --save-dev vitest @testing-library/react @testing-library/jest-dom msw
+
+
 
 ## Challenges Faced
 - **State Management**: Deciding between different state management libraries and implementing Redux Toolkit effectively.

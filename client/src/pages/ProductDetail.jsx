@@ -22,6 +22,11 @@ function ProductDetail() {
 
   const cart = useSelector(state => state.cart)
   const wishlist = useSelector(state => state.wishlist)
+
+  const [size, setSize] = useState("medium");
+  const handleSizeChange = (event) => {
+  setSize(event.target.value);
+};
   const dispatch = useDispatch()
 
    const handleAddToCartBtn = (product) =>{
@@ -100,7 +105,7 @@ const handleRemoveFromWishlist = (id) =>{
         {/* Right Section product details*/}
         <div className="md:w-1/2 h-full py-2 px-1  flex flex-col justify-between">
           <div>
-            <h1 className="text-2xl font-bold">{product?.title}</h1>
+            <h1 className="text-2xl font-bold" >{product?.title}</h1>
             <p className="text-xl font-semibold text-blue-900 mt-4">
               Price: ${product?.price}
             </p>
@@ -127,12 +132,12 @@ const handleRemoveFromWishlist = (id) =>{
             <div className="flex gap-2 mt-4 ">
               <p className="text-xl font-bold text-blue-900">Size :</p>
               <div className="flex gap-4">
-                <select value="size" className="font-bold text-xl ">
-                  <option value="medium">Medium</option>
-                  <option value="large">Large</option>
-                  <option value="extra large">Extra Large</option>
-                  <option value="small">Small</option>
-                </select>
+              <select value={size} onChange={handleSizeChange} className="font-bold text-xl">
+  <option value="medium">Medium</option>
+  <option value="large">Large</option>
+  <option value="extra large">Extra Large</option>
+  <option value="small">Small</option>
+</select>
 
                 <h1 className="text-xl font-bold">📏 Size Guide</h1>
               </div>

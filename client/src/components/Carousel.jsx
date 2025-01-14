@@ -20,8 +20,8 @@ function Carousel() {
   
   return (
     <div className='w-full h-[60vh] md:h-[64vh] overflow-hidden  bg-[#9183eb] relative'>
-      <img src={data[index].url} alt="carousel_image" className='w-full h-full object-top' />
-      <button onClick={()=>handleDecrement()} className='absolute top-1/2 left-1 text-white bg-[#41187F] px-4 py-2 rounded-md'> <FaAnglesLeft size={32} className='text-white'/> </button>
+      <img src={data[index].url} alt={`carousel_image_${index}`} className='w-full h-full object-top' />
+      <button onClick={()=>handleDecrement()} className='absolute top-1/2 left-1 text-white bg-[#41187F] px-4 py-2 rounded-md'> <FaAnglesLeft size={32} className='text-white' id='next' /> </button>
       <button onClick={()=>handleIncrement()} className='absolute top-1/2 right-1 text-white bg-[#41187F] px-4 py-2 rounded-md'><FaAnglesRight size={32} className='text-white'/></button>
     </div>
   )

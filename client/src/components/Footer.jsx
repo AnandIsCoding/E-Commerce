@@ -21,7 +21,7 @@ function Footer() {
 
         </div>
 
-        <div className="w-[50%]  bg-violet-950 flex flex-col justify-center items-center">
+        <div className="w-[50%]  bg-violet-950 flex flex-col justify-center items-center" id='quicklinks'>
           {/* Quick Links */}
           <div>
             <h3 className="text-xl mb-4 text-white font-bold">Quick Links</h3>
