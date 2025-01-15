@@ -12,8 +12,8 @@ function MobileOption({setAnimatecategories}) {
   const navigate = useNavigate()
 
    // subscribe to wishlist and cart
-   const cart = useSelector(state => state.cart)
-   const wishlist = useSelector((state) => state.wishlist);
+   const cart = useSelector(state => state.cart) 
+   const wishlist = useSelector((state) => state.wishlist)  ;
 
      //get cart and wishlist from localstorage, for local updation 
  const [inlocalcart, setInlocalcart] = useState(JSON.parse(localStorage.getItem('cart')))
@@ -53,12 +53,12 @@ function MobileOption({setAnimatecategories}) {
 
       <button aria-label="Cart" onClick={()=>navigate('/cart')}>
         <FaCartPlus size={32} aria-hidden="true" />
-        <p> { `Cart ${inlocalcart?.length}` } </p>
+        <p> Cart <span>{inlocalcart?.length}</span>  </p>
       </button>
 
       <button aria-label="Wishlist" onClick={()=>navigate('/wishlist')}>
         <FaRegHeart size={32} aria-hidden="true"  />
-        <p> { `WishList ${inLocalWish?.length}` } </p>
+        <p> WishList <span>{inLocalWish?.length}</span> </p>
       </button>
     </nav>
   );

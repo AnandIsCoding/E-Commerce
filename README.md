@@ -113,14 +113,12 @@ npm install --save-dev vitest @testing-library/react @testing-library/jest-dom m
 
 
 ## Challenges Faced
-- **State Management**: Deciding between different state management libraries and implementing Redux Toolkit effectively.
-- **Responsive Design**: Ensuring consistent layouts across various screen sizes with Tailwind CSS.
-- **Dynamic Routing**: Configuring React Router for seamless navigation.
+- **State Management**: implementing Redux Toolkit effectively.
+- **Localstorage usage**: Make data storage persistent
 
 
 ## Learnings and Key Takeaways
 - Improved proficiency in React.js and state management using Redux Toolkit.
-- Gained experience in implementing responsive layouts with Tailwind CSS.
 - Learned to structure projects and write modular, reusable code.
 
 
@@ -145,4 +143,4 @@ This project was developed individually as part of an AlmaBetter assignment. Spe
 
 
 
-## Anand Jha🌿💞
+## Anand Jha🌿🫰
