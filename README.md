@@ -56,7 +56,7 @@ You can view the live version of this project here:
 - **Styling**: Tailwind CSS
 - **Icons**: React Icons
 - **Notifications**: react-hot-toast
-- **Routing**: React Router
+- **Routing**: React Router Dom
 
 ---
 
