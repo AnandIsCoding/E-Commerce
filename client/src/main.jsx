@@ -9,8 +9,10 @@ import {Provider} from 'react-redux'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={appStore}>
+  {/* Toaster for showing notifications */}
   <Toaster/>
   <BrowserRouter>
+  {/* Main App component */}
     <App />
   </BrowserRouter>
   </Provider>,

@@ -3,26 +3,32 @@ import { BsTelephone } from "react-icons/bs";
 function Footer() {
   return (
     <div className="w-full flex flex-col md:flex-row  min-h-[10vw] pb-[4.8rem] md:pb-0">
+    {/* Main footer container divided into 2 sections */}
       <div className="w-full flex md:flex-row">
-
+         
+         {/* Left section: About the company */}
         <div className="w-[50%]  bg-violet-950 text-white p-8 relative">
           <h1 className="text-2xl">आनंद Clothing</h1>
           <p className="text-sm text-gray-400">
             We are a leading online retailer, delivering quality products and
             exceptional customer service. Your satisfaction is our top priority.
           </p>
+
+           {/* Contact information */}
           <div className="flex gap-4 mt-4">
             <h1 className="flex gap-2 border-2 border-zinc-200 px-5 py-3">
               {" "}
               <BsTelephone size={20} className="mt-1" /> Call: +123 456 7890{" "}
             </h1>
+
+            {/* Copyright notice */}
             <h1 className="absolute bottom-2 right-0 left-0  text-white bg-[#41187F] px-5 py-2 text-lg w-fit rounded-lg">Copyright &copy; AnandClothing Rights Reserved </h1>
           </div>
 
         </div>
 
         <div className="w-[50%]  bg-violet-950 flex flex-col justify-center items-center" id='quicklinks'>
-          {/* Quick Links */}
+            {/* Right section: Quick links */}
           <div>
             <h3 className="text-xl mb-4 text-white font-bold">Quick Links</h3>
             <ul className="space-y-2 text-white text-sm">
@@ -56,9 +62,13 @@ function Footer() {
         </div>
       </div>
 
+
+
+       {/* Bottom section divided into two columns */}
+
       <div className="w-full flex md:flex-row">
         <div className="w-[50%] bg-violet-950 flex flex-col justify-center items-center">
-          {/* Customer Service */}
+           {/* Customer Service links */}
           <h3 className="text-xl mb-4 text-white font-bold">
             Customer Service
           </h3>
@@ -96,6 +106,9 @@ function Footer() {
           </ul>
         </div>
 
+
+          {/* My Account links and social media section */}
+
         <div className="w-[50%] bg-violet-950 flex flex-col justify-center items-center">
           <h3 className="text-xl mb-4 text-white font-bold mt-2">My Account</h3>
           <ul className="space-y-2 text-gray-400">
@@ -124,7 +137,7 @@ function Footer() {
                 Logout
               </a>
             </li>
-            {/* Social Media or Newsletter */}
+            {/* Social Media or Newsletter section */}
             <div>
               <h3 className="text-xl font-semibold  ">Stay Connected</h3>
               <ul className=" flex gap-4 ">

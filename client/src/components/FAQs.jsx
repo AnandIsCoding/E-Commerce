@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
-//importing FAQ data from utils folder faqData file
+// Importing FAQ data from the utils folder
 import { FAQdata } from "../utils/faqData";
 
 function FAQs() {
   // State to keep track of which FAQ item is currently open
   const [openIndex, setOpenindex] = useState(0);  // be default open 1 
 
-  // show hide FAQ item's description
+  // show hide FAQ item's description, Toggles the open/close state of an FAQ item
   const handleOpen = (index) => {
     setOpenindex(index === openIndex ? null : index); // Close the item if already open, otherwise open it
   };
 
   return (
     <div className="w-full py-10 flex flex-col md:flex-row ">
-      {/* Left section with a video dior*/}
+       {/* Left section: A video area */}
       <div className="md:w-[40%] bg-violet-300 rounded-lg">
         <video
           src="/video.mp4" 

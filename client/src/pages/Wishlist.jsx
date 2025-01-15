@@ -9,18 +9,21 @@ import { FaFacebook } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 
 function Wishlist() {
-   //get wishlist data from localstorage if it's null than []
 
+  // Subscribe to the Redux store to access cart and wishlist data
        const wishlist = useSelector((state) => state.wishlist);
 
+       // Local state for wishlist management
   const [wishlistLocal,setWishlistLocal] = useState(JSON.parse(localStorage.getItem('wishlist')) || [])
   const dispatch = useDispatch();
 
+// remove product from wishlist handler 
   const handleRemoveFromWishlist = (id) => {
     toast.success('Product removed from wishlist successfully');
     dispatch(removeFromWishlist(id));
   };
 
+  // Update local cart state whenever the Redux cart state changes
   useEffect(()=>{
     setWishlistLocal(JSON.parse(localStorage.getItem('wishlist')))
   },[wishlist.length])
@@ -88,7 +91,7 @@ function Wishlist() {
 
             <div className='w-full flex items-center gap-4 my-5'>
 
-            
+             {/* social media icons, static */}
   <h1 className='text-xl font-bold mt-5'>Share</h1>
   <div className='flex gap-3 pt-4'>
     <div className='w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer'>

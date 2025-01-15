@@ -7,33 +7,35 @@ import toast from 'react-hot-toast';
 import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
 import { IoIosHeart } from "react-icons/io";
 
+
+
 function ProductCard({ product }) {
   const { title, category, price, image, id } = product;
   const dispatch = useDispatch();
   
-  // Redux state for cart
-  const cart = useSelector((state) => state.cart);  // Access the cart from Redux store
+  // Subscribe to the Redux store to access cart and wishlist data
+  const cart = useSelector((state) => state.cart); 
   
-  // Local state for wishlist
+  // Local state for wishlist management
   const [wishlist, setWishlist] = useState([]);
 
-  // Fetch wishlist from localStorage on mount
+  //  // Fetch wishlist from localStorage when the component mounts
   useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     if (Array.isArray(storedWishlist)) {
       setWishlist(storedWishlist);
     } else {
-      setWishlist([]);
+      setWishlist([]);  // Fallback an empty array if data is invalid
     }
-  }, []);  // Empty dependency array to run once on mount
+  }, []);  // Empty dependency array to run once 
 
-  // Add to cart handler
+  // Add to cart handler, add product to cart and display success toast
   const handleAddToCartBtn = (product) => {
     dispatch(addToCart(product));  // Dispatch action to add to Redux state
     toast.success('Product added to cart successfully');
   };
 
-  // Remove from cart handler
+  // Remove from cart handler,  remove product from cart and display success toast
   const handleRemoveFromCartBtn = (id) => {
     dispatch(removeFromCart(id));  // Dispatch action to remove from Redux state
     toast.success('Product removed from cart successfully');
@@ -41,10 +43,10 @@ function ProductCard({ product }) {
 
   // Add to wishlist handler
   const handleAddToWishlistBtn = (product) => {
-    const updatedWishlist = [...wishlist, product];
+    const updatedWishlist = [...wishlist, product];  
     setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
-    dispatch(addToWishlist(product));
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // Save updated wishlist to localStorage
+    dispatch(addToWishlist(product));   
     toast.success('Product added to wishlist successfully');
   };
 
@@ -60,10 +62,11 @@ function ProductCard({ product }) {
   // Sync cart with localStorage whenever the cart changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));  // Sync Redux cart state to localStorage
-  }, [cart.length]);  // Runs whenever the cart state in Redux is updated
+  }, [cart.length]);  // Runs whenever the cart length changes
 
   return (
     <div key={product?.id} className='products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]'>
+    {/* Wishlist button toggles between add and remove */}
       {
         wishlist?.find((i) => i.id === product.id) ? (
           <button onClick={() => handleRemoveFromWishlist(product.id)} className="absolute top-1 right-1 text-lg px-2 py-3 rounded-sm mb-4">
@@ -76,16 +79,20 @@ function ProductCard({ product }) {
         )
       }
 
+       {/* Product image */}
+
       <div className='w-full h-[50%] rounded-xl'>
         <img src={image} alt='product_image' className='w-full h-full object-cover rounded-xl' />
       </div>
 
+      {/* Product details */}
       <div>
         <p className='text-lg font-semibold text-violet-800 text-center'>{category}</p>
         <p className='text-sm font-semibold text-black'>{title.slice(0, 30)}...</p>
         <p className='text-lg font-semibold text-black text-center'>${price}</p>
       </div>
 
+      {/* Actions: View Product, Add/Remove from Cart */}
       <div className='flex flex-col gap-2'>
         <NavLink to={`/product/${id}`} className='w-[100%] px-8 py-3 bg-[#41187F] text-white text-center rounded-lg'>View Product</NavLink>
         {

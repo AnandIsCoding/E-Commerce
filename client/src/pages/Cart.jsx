@@ -7,7 +7,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Cart() {
   const dispatch = useDispatch();
-  //subscribe to cart 
+   // Subscribe to the cart state from Redux store
   const cart = useSelector(state => state.cart)
   // creating local state for cart so that when removed from cart from cart page than product card disappear
    const [cartLocal,setCartLocal] = useState(JSON.parse(localStorage.getItem('cart')) || [])
@@ -39,13 +39,15 @@ function Cart() {
       [id]: Math.max(0, prev[id] - 1), // Prevent quantity from going below 0
     }));
   };
-
+ 
+  // shipping options static data
   const shippingOptions = [
     { id: "standard", label: "Standard Shipping (3-5 days)", price: 5 },
     { id: "express", label: "Express Shipping (1-2 days)", price: 10 },
     { id: "free", label: "Free Shipping (7-10 days)", price: 0 },
   ];
 
+  // Update local cart state whenever the Redux cart state changes
   useEffect(()=>{
     setCartLocal(JSON.parse(localStorage.getItem('cart')))
   },[cart.length])
@@ -122,7 +124,8 @@ function Cart() {
             ))}
           </div>
 
-          {/* right section */}
+                 {/* Right section: Summary and checkout */}
+
           <div className="md:w-[35%] bg-black px-1 py-3 md:px-8 md:py-10">
             <div className="w-full h-full bg-white rounded-lg px-4 py-5 ">
               <h1 className="text-xl font-bold items-center">Cart Total</h1>
@@ -131,7 +134,8 @@ function Cart() {
                 <h1 className="text-xl font-semibold">Subtotal:</h1>
                 <h1 className="text-xl font-semibold">${totalOfproduct}</h1>
               </div>
-
+              
+              {/* Shipping options */}
               <h2 className="text-xl font-bold mb-4 mt-6 px-3">
                 Shipping Options
               </h2>
@@ -151,6 +155,7 @@ function Cart() {
                 ))}
               </div>
 
+                  {/* Coupon section */}
               <div className="w-full px-4 py-4 bg-gray-100 rounded-md mt-4">
                 <h3 className="text-lg font-semibold mb-2">
                   Have a Coupon Code?
@@ -166,6 +171,8 @@ function Cart() {
                   </button>
                 </div>
               </div>
+
+               {/* Total and Checkout */}
 
               <div className="w-full px-3 flex justify-between my-7">
                 <h1 className="text-xl font-semibold">Total:</h1>

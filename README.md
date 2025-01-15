@@ -87,13 +87,17 @@ You can view the live version of this project here:
 ![Home Page](/client/public/home1.png)
 
 ### FAQ Footer
-![Wishlist Page](/client/public/home2.png)
+![Footer](/client/public/home2.png)
 
 ### Mobile view
 ![Home Page](/client/public/mobileSS.png)
 
 ### Cart Page
-![Wishlist Page](/client/public/cartSS.png)
+![Cart Page](/client/public/cartSS.png)
+
+
+### Wishlist Page
+![Wishlist Page](/client/public/wishlist.png)
 
 
 ## Testing 

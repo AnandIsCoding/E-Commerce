@@ -1,3 +1,5 @@
+// Import necessary libraries and components
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,46 +9,60 @@ import MultiStepDescription from "../components/MultiStepDescription";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { addToCart, removeFromCart } from "../redux/slices/cartSlice";
-import {addToWishlist, removeFromWishlist} from '../redux/slices/wishlistSlice'
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../redux/slices/wishlistSlice";
 
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 
 function ProductDetail() {
-  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { id } = useParams(); // Extract product ID from URL parameters
+  // State for quantity, product details, loading, and error handling
   const [quantity, setQuantity] = useState(0);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const cart = useSelector(state => state.cart)
-  const wishlist = useSelector(state => state.wishlist)
+  // Subscribe to the Redux store to access cart and wishlist data
+  const cart = useSelector((state) => state.cart);
+  const wishlist = useSelector((state) => state.wishlist);
 
+  // State for product size
   const [size, setSize] = useState("medium");
   const handleSizeChange = (event) => {
-  setSize(event.target.value);
-};
-  const dispatch = useDispatch()
+    setSize(event.target.value);
+  };
 
-   const handleAddToCartBtn = (product) =>{
-     dispatch(addToCart(product))
-     toast.success('Product added to cart successfully')
-   }
-   const handleRemoveFromCartBtn = (id) =>{
-    dispatch(removeFromCart(id))
-    toast.success('Product removed from cart successfully')
-}
+  // Add product from cart
+  const handleAddToCartBtn = (product) => {
+    dispatch(addToCart(product));
+    toast.success("Product added to cart successfully");
+  };
 
-const handleAddToWishlistBtn = (product) =>{
-  dispatch(addToWishlist(product))
-  toast.success('Product added to wishlist successfully')
-}
-const handleRemoveFromWishlist = (id) =>{
-  toast.success('Product removed from wishlist successfully')
-  dispatch(removeFromWishlist(id))
-}
+  // Remove product from cart
+  const handleRemoveFromCartBtn = (id) => {
+    dispatch(removeFromCart(id));
+    toast.success("Product removed from cart successfully");
+  };
 
+  // Add product to wishlist
+  const handleAddToWishlistBtn = (product) => {
+    dispatch(addToWishlist(product));
+    toast.success("Product added to wishlist successfully");
+  };
+
+  // Remove from wishlist
+  const handleRemoveFromWishlist = (id) => {
+    toast.success("Product removed from wishlist successfully");
+    dispatch(removeFromWishlist(id));
+  };
+
+
+  // Fetch product details from API
   const fetchProductDetails = async () => {
     try {
       const res = await axios.get(`https://fakestoreapi.com/products/${id}`);
@@ -105,7 +121,7 @@ const handleRemoveFromWishlist = (id) =>{
         {/* Right Section product details*/}
         <div className="md:w-1/2 h-full py-2 px-1  flex flex-col justify-between">
           <div>
-            <h1 className="text-2xl font-bold" >{product?.title}</h1>
+            <h1 className="text-2xl font-bold">{product?.title}</h1>
             <p className="text-xl font-semibold text-blue-900 mt-4">
               Price: ${product?.price}
             </p>
@@ -132,12 +148,16 @@ const handleRemoveFromWishlist = (id) =>{
             <div className="flex gap-2 mt-4 ">
               <p className="text-xl font-bold text-blue-900">Size :</p>
               <div className="flex gap-4">
-              <select value={size} onChange={handleSizeChange} className="font-bold text-xl">
-  <option value="medium">Medium</option>
-  <option value="large">Large</option>
-  <option value="extra large">Extra Large</option>
-  <option value="small">Small</option>
-</select>
+                <select
+                  value={size}
+                  onChange={handleSizeChange}
+                  className="font-bold text-xl"
+                >
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="extra large">Extra Large</option>
+                  <option value="small">Small</option>
+                </select>
 
                 <h1 className="text-xl font-bold">📏 Size Guide</h1>
               </div>
@@ -171,18 +191,40 @@ const handleRemoveFromWishlist = (id) =>{
           {/* buttons for cart wishlist etc */}
 
           <div className="w-full flex mt-8  gap-4">
-            {
-              wishlist.find((i)=>i.id === product.id) ? <button onClick={(id) => handleRemoveFromWishlist(product.id) } className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
-              {" "}
-              🖤 Remove from wishlist
-            </button> : <button onClick={()=> handleAddToWishlistBtn(product)} className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
-              {" "}
-              🤍 Add to wishlist
-            </button>
-            }
-            {
-                    cart.find((i)=> i.id === product.id) ? <button onClick={()=> handleRemoveFromCartBtn(product.id)} className='md:w-[33.33%] text-lg px-2 py-3 border-2  border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 flex items-center justify-center gap-2'> <RiDeleteBin6Line/> Remove From Cart</button> : <button onClick={() => handleAddToCartBtn(product)} className='md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4'> 🛒 Add to Cart</button>
-                  }
+            {wishlist.find((i) => i.id === product.id) ? (
+              <button
+                onClick={(id) => handleRemoveFromWishlist(product.id)}
+                className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 "
+              >
+                {" "}
+                🖤 Remove from wishlist
+              </button>
+            ) : (
+              <button
+                onClick={() => handleAddToWishlistBtn(product)}
+                className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 "
+              >
+                {" "}
+                🤍 Add to wishlist
+              </button>
+            )}
+            {cart.find((i) => i.id === product.id) ? (
+              <button
+                onClick={() => handleRemoveFromCartBtn(product.id)}
+                className="md:w-[33.33%] text-lg px-2 py-3 border-2  border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 flex items-center justify-center gap-2"
+              >
+                {" "}
+                <RiDeleteBin6Line /> Remove From Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => handleAddToCartBtn(product)}
+                className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4"
+              >
+                {" "}
+                🛒 Add to Cart
+              </button>
+            )}
             <button className="md:w-[33.33%] text-lg px-2 py-3 border-2 border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 ">
               ⚖ Add to Compare
             </button>
@@ -197,18 +239,18 @@ const handleRemoveFromWishlist = (id) =>{
               <p className="text-lg ">{product.category}</p>
             </div>
             <div className="w-[50%] px-4 flex gap-2">
-              <h1 className='text-xl font-bold'>Share</h1>
-                <div className='flex gap-4'>
-                  <div className='w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer'>
-                    <FaWhatsapp className='text-green-500 w-full h-full object-cover' />
-                  </div>
-                  <div className='w-8 h-8  items-center rounded-full flex justify-center text-white text-xl cursor-pointer '>
-                  <AiFillInstagram className='text-[red] w-full h-full object-cover' />
-                  </div>
-                  <div className='w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer '>
-                  <FaFacebook className='text-[blue] w-full h-full object-cover' />
-                  </div>
+              <h1 className="text-xl font-bold">Share</h1>
+              <div className="flex gap-4">
+                <div className="w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer">
+                  <FaWhatsapp className="text-green-500 w-full h-full object-cover" />
                 </div>
+                <div className="w-8 h-8  items-center rounded-full flex justify-center text-white text-xl cursor-pointer ">
+                  <AiFillInstagram className="text-[red] w-full h-full object-cover" />
+                </div>
+                <div className="w-8 h-8 flex items-center rounded-full  justify-center text-white text-xl cursor-pointer ">
+                  <FaFacebook className="text-[blue] w-full h-full object-cover" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -220,7 +262,12 @@ const handleRemoveFromWishlist = (id) =>{
       </div>
 
       {/* back button in desktop using bom functionality or method histore object's .go method */}
-      <button onClick={()=> window.history.go(-1)} className="absolute top-2 right-2 bg-violet-300 px-8 py-2 rounded-md hidden md:block">Back</button>
+      <button
+        onClick={() => window.history.go(-1)}
+        className="absolute top-2 right-2 bg-violet-300 px-8 py-2 rounded-md hidden md:block"
+      >
+        Back
+      </button>
     </div>
   );
 }

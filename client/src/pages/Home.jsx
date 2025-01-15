@@ -1,3 +1,4 @@
+// Import necessary libraries, components, and icons
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { IoSearchOutline } from "react-icons/io5";
@@ -18,18 +19,20 @@ import { FaBell } from "react-icons/fa";
 
 function Home({ animateCategories, setAnimatecategories }) {
  
-  // subscribe to wishlist and cart
+  // subscribe to wishlist and cart data from Redux store
   const cart = useSelector(state => state.cart)
   const wishlist = useSelector(state => state.wishlist);
 
-  //get cart and wishlist from localstorage, for local updation 
+  // Initialize states to manage cart and wishlist stored locally
   const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
   const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
+  // Update local cart state whenever the Redux cart state changes
   useEffect(()=>{    
     setInlocal(JSON.parse(localStorage.getItem('cart')))
   },[cart])
 
+  // Update local wishlist state whenever the Redux wishlist state changes
   useEffect(()=>{    
     setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
   },[wishlist])
@@ -40,6 +43,7 @@ function Home({ animateCategories, setAnimatecategories }) {
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // Fetch all products from API
   const getAllProducts = async () => {
     try {
       const res = await axios.get("https://fakestoreapi.com/products");
@@ -66,6 +70,7 @@ function Home({ animateCategories, setAnimatecategories }) {
     setPage(1); // Reset pagination
   };
 
+  // Fetch products by category
   const handleCategory = async (category) => {
     try {
       const res = await axios.get(
@@ -77,6 +82,7 @@ function Home({ animateCategories, setAnimatecategories }) {
     }
   };
 
+  // Load products from local storage or fetch them if not available
   useEffect(() => {
     const savedProducts = localStorage.getItem("products");
     if (savedProducts) {

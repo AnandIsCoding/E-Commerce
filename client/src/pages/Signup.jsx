@@ -7,6 +7,7 @@ function Signup() {
   const [showPassword, setShowpassword] = useState(false);
   const [isSignupform, setissignupform] = useState(true);  
 
+  // States for storing user inputs
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -79,6 +80,8 @@ function Signup() {
   return (
     <div className='w-full h-full flex md:fixed'>
 
+    {/* Left section with background video for larger screens */}
+
       <div className='hidden md:flex md:w-[60%] lg:w-[70%] h-screen h bg-violet-500'>
       <video
           src="/modelvideo.mp4" 
@@ -94,12 +97,14 @@ function Signup() {
 
 
 
-      {/* form and all */}
+    {/* Right section with the form */}
       <div className='w-[100%] md:w-[40%] lg:w-[30%] px-5 py-3 md:p-2'>
         <h1 className=" text-center text-2xl mb-0 font-bold text-black">
           {" "}
           {isSignupform ? "Signup" : "Login"}{" "}
         </h1>
+
+          {/* Profile Image */}
         <div className="w-[12vw] h-[12vw] md:w-[2.5vw] md:h-[2.5vw] bg-violet-100 ml-auto mr-auto rounded-full ">
           <img
             src="https://png.pngtree.com/png-clipart/20231019/original/pngtree-user-profile-avatar-png-image_13369988.png"
@@ -108,7 +113,7 @@ function Signup() {
           />
         </div>
 
-
+       {/* Form for login/signup */}
         <form>
           {isSignupform && (
             <div>
@@ -205,6 +210,8 @@ function Signup() {
           </button>
         </form>
 
+
+              {/* Switch between signup and login */}
         <h2 className="text-center">
           {isSignupform
             ? "Already have a account ?"

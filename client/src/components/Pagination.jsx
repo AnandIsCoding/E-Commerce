@@ -1,12 +1,13 @@
 import React from "react";
-import { useState } from "react";
-import { FaAnglesLeft } from "react-icons/fa6";
-import { FaAnglesRight } from "react-icons/fa6";
+import { FaAnglesLeft } from "react-icons/fa6";  // Icon for the left arrow
+import { FaAnglesRight } from "react-icons/fa6";  // Icon for the right arrow
 
 function Pagination({ allProducts, page, setPage }) {
   return (
     <div className="w-full  mb-4 flex items-center md:justify-center md:gap-x-3 mt-10  ">
    
+
+       {/* Previous Button */}
       <button
         onClick={() => setPage((prev) => (prev <= 1 ? prev : prev - 1))}
         disabled={page <= 1} // Disable if on the first page
@@ -17,6 +18,7 @@ function Pagination({ allProducts, page, setPage }) {
         <FaAnglesLeft size={18} className="text-white" />
       </button>
 
+           {/* Page Numbers */}
       <div className="bg-white h-ful flex gap-x-8">
         {[...Array(Math.ceil(allProducts?.length / 5))].map((_, index) => {
           return (
@@ -30,6 +32,8 @@ function Pagination({ allProducts, page, setPage }) {
           );
         })}
       </div>
+
+      {/* Next Button */}
       <button
         onClick={() =>
           setPage((prev) =>
