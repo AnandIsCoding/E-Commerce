@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import { MdLocalOffer } from "react-icons/md";
 import Carousel from "../components/Carousel";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
@@ -15,18 +14,19 @@ import Footer from "../components/Footer";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { FaBell } from "react-icons/fa";
 
 function Home({ animateCategories, setAnimatecategories }) {
  
-    // subscribe to wishlist and cart
-    const cart = useSelector(state => state.cart)
-    const wishlist = useSelector((state) => state.wishlist);
+  // subscribe to wishlist and cart
+  const cart = useSelector(state => state.cart)
+  const wishlist = useSelector(state => state.wishlist);
 
+  //get cart and wishlist from localstorage, for local updation 
   const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
   const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
-  useEffect(()=>{
-    
+  useEffect(()=>{    
     setInlocal(JSON.parse(localStorage.getItem('cart')))
   },[cart])
 
@@ -35,29 +35,10 @@ function Home({ animateCategories, setAnimatecategories }) {
   },[wishlist])
 
 
-
-  // Fetch wishlist from localStorage on mount
-  useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-  }, []);
-
-  // Add product to cart
-  const [totalCart, setTotalcart] = useState(0);
-  const [totalWishlist, setTotalwishlist] = useState(0);
-
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
-  useEffect(() => {
-    setTotalcart(inlocal?.length);
-  }, [cart?.length]);
-
-  useEffect(() => {
-    setTotalwishlist(inLocalWish?.length);
-  }, [wishlist?.length]);
 
   const getAllProducts = async () => {
     try {
@@ -186,8 +167,8 @@ function Home({ animateCategories, setAnimatecategories }) {
               {category}
             </h1>
           ))}
-          <h1 className="hidden md:flex bg-white text-black px-4 py-2 rounded-lg text-xl flex-shrink-0 ml-[10%] gap-2">
-            <MdLocalOffer size={24} className="mt-1 text-[#41187F]" />
+          <h1 className="flex bg-white text-black px-4 py-2 rounded-lg text-xl flex-shrink-0 ml-[10%] gap-2">
+            <FaBell size={24} className="mt-1 text-[#41187F]" />
             Clearance Up To 20% Off
           </h1>
         </div>

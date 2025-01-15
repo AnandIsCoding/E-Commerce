@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -7,8 +7,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Cart() {
   const dispatch = useDispatch();
-  //get cart data from localstorage if it's null than []
-  const cart = JSON.parse(localStorage.getItem('cart')) || []
+  //subscribe to cart 
+  const cart = useSelector(state => state.cart)
+  // creating local state for cart so that when removed from cart from cart page than product card disappear
+   const [cartLocal,setCartLocal] = useState(JSON.parse(localStorage.getItem('cart')) || [])
   const navigate = useNavigate();
   // using reduce finding total sum of price of products in cart
   const [totalOfproduct, setTotalofproduct] = useState(
@@ -44,16 +46,20 @@ function Cart() {
     { id: "free", label: "Free Shipping (7-10 days)", price: 0 },
   ];
 
+  useEffect(()=>{
+    setCartLocal(JSON.parse(localStorage.getItem('cart')))
+  },[cart.length])
+
 
   return (
     <div className="bg-black h-screen">
       {/* if cart is [] empty than show cart is empty and a button to go back to home page / */}
-      {cart.length < 1 ? (
+      {cartLocal.length < 1 ? (
         <div className="absolute w-full h-full flex flex-col gap-5 justify-center items-center self-center px-8 py-5 rounded-xl">
           <h1 className="text-4xl font-bold text-white"> Your cart is empty</h1>
           <NavLink
             to="/"
-            className="px-14 py-4  bg-[#41187F] text-white font-bold text-3xl"
+            className="px-10 py-3 bg-[#41187F] text-white font-bold text-xl lg:text-2xl rounded-lg hover:bg-purple-700 transition duration-300"
           >
             Explore products
           </NavLink>
@@ -63,7 +69,7 @@ function Cart() {
           {/* left section for cart images andtitle */}
           {/* onclick of cart item navigate to show full detail of product */}
           <div className="w-full md:w-2/3 bg-black overflow-y-auto px-4 py-6 space-y-6">
-            {cart.map((item) => (
+            {cartLocal.map((item) => (
               <div
                 key={item.id}
                 onClick={(event) => {
