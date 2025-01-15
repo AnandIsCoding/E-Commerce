@@ -20,8 +20,9 @@ You can view the live version of this project here:
 5. [Usage](#usage)
 6. [Screenshots](#screenshots)
 7. [Folder Structure](#folder-structure)
-8. [Future Enhancements](#future-enhancements)
-9. [Acknowledgments](#acknowledgments)
+8. [Testing](#testing)
+9. [Future Enhancements](#future-enhancements)
+10. [Acknowledgments](#acknowledgments)
 
 ---
 
