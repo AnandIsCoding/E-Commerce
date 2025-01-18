@@ -9,6 +9,13 @@ An interactive and responsive e-commerce platform built with React.js. This proj
 You can view the live version of this project here:  
 [🛒 E-Commerce Website - Live Demo  ](https://anandmayclothing.netlify.app/)
 
+You can view the video demonstration of this project:
+[🛒 E-Commerce Website - Video Demo  ](https://www.loom.com/share/73a24433c1e74dc7a4a4f51db48d20d0?sid=46c6f553-8f59-4fbe-bb68-8cc041ba2d04/)
+
+You can view the google Docs file which include summary useful links etc:
+[🛒 E-Commerce Website - Docs File link  ](https://docs.google.com/document/d/1xDJTogeUi8fS2hVWYiwBRJoDAxBqJnL2/edit?usp=sharing&ouid=117885336231223452133&rtpof=true&sd=true)
+
+
 
 
 
