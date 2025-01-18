@@ -44,7 +44,7 @@ You can view the google Docs file which include summary useful links etc:
 ### Design Features
 - Fully responsive design for all screen sizes.
 - Tailwind CSS for modern and customizable styling.
-- Consistent UI with reusable components.
+- Consistent UI with reusable components. Disabled right click default behaviour of browser to inspect, inspect via f12.
 
 
 ## Usage
