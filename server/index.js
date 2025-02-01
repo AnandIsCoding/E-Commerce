@@ -1,0 +1,33 @@
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import chalk from 'chalk'
+
+import connectToDb from './config/database.config.js'
+import productRouter from './routes/product.routes.js'
+
+dotenv.config()
+
+const app = express()
+const PORT = process.env.SERVER_PORT || 7000
+
+//middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(cors({
+    origin: "https://localhost:5173",
+    credentials:true
+}))
+
+//routes
+app.use('/api/v1/products', productRouter)
+
+connectToDb().then(()=>{
+    console.log(chalk.bgMagenta('Connected to MongoDB Database successfully 🫰'))
+    app.listen(PORT,()=>{
+        console.log(chalk.bgGreenBright(`Server is listening at http://localhost:${PORT}`))
+    })
+}).catch((error)=>{
+    console.log(chalk.bgRed('Error in connecting to MongoDB Database :'+ error.message))
+    process.exit(1)  // exit the process with an error status code 1
+})
