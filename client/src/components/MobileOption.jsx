@@ -16,13 +16,13 @@ function MobileOption({setAnimatecategories}) {
    const wishlist = useSelector((state) => state.wishlist)  ;
 
     // State for tracking the local cart and wishlist data
- const [inlocalcart, setInlocalcart] = useState(JSON.parse(localStorage.getItem('cart')))
+//  const [inlocalcart, setInlocalcart] = useState(JSON.parse(localStorage.getItem('cart')))
  const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
  // Update local cart state when the Redux cart state changes
- useEffect(()=>{   
-   setInlocalcart(JSON.parse(localStorage.getItem('cart')))
- },[cart])
+//  useEffect(()=>{   
+//    setInlocalcart(JSON.parse(localStorage.getItem('cart')))
+//  },[cart])
 
 // Update local wishlist state when the Redux wishlist state changes
  useEffect(()=>{    
@@ -59,7 +59,7 @@ function MobileOption({setAnimatecategories}) {
        {/* Cart Button */}
       <button aria-label="Cart" onClick={()=>navigate('/cart')}>
         <FaCartPlus size={32} aria-hidden="true" />
-        <p> Cart <span>{inlocalcart?.length}</span>  </p>
+        <p> Cart <span>{cart?.length}</span>  </p>
       </button>
 
 

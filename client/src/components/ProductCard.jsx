@@ -6,15 +6,24 @@ import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
 import toast from 'react-hot-toast';
 import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
 import { IoIosHeart } from "react-icons/io";
+import axios from 'axios'
 
 
 
 function ProductCard({ product }) {
-  const { title, category, price, image, id } = product;
+  const { title, category, price, image, _id } = product;
   const dispatch = useDispatch();
   
   // Subscribe to the Redux store to access cart and wishlist data
-  const cart = useSelector((state) => state.cart); 
+ const [allCart, setAllCart] = useState([])
+   const cart = useSelector(state => state.cart)
+    
+
+   useEffect(()=>{
+      setAllCart(cart?.map((item)=> item?._id))
+    },[cart])
+  
+
   
   // Local state for wishlist management
   const [wishlist, setWishlist] = useState([]);
@@ -25,21 +34,41 @@ function ProductCard({ product }) {
     if (Array.isArray(storedWishlist)) {
       setWishlist(storedWishlist);
     } else {
-      setWishlist([]);  // Fallback an empty array if data is invalid
+      setWishlist([]);  // Fallback an empty array if data is inval_id
     }
   }, []);  // Empty dependency array to run once 
 
-  // Add to cart handler, add product to cart and display success toast
-  const handleAddToCartBtn = (product) => {
-    dispatch(addToCart(product));  // Dispatch action to add to Redux state
-    toast.success('Product added to cart successfully');
-  };
+  // Toggle add/remove from cart
+  const handleAddToCartBtn = async (product) => {
+    try {
+      const res = await axios.post('http://localhost:3000/api/v1/cart/add-remove', { _id: product._id });      
 
-  // Remove from cart handler,  remove product from cart and display success toast
-  const handleRemoveFromCartBtn = (id) => {
-    dispatch(removeFromCart(id));  // Dispatch action to remove from Redux state
-    toast.success('Product removed from cart successfully');
+      if (res.data.success) {
+        
+        
+        // Check if item exists in the cart and toggle accordingly
+        const isInCart = cart.some(item => item._id === _id);
+        if (isInCart) {
+          dispatch(removeFromCart(product._id));
+          toast.success(res.data.message);
+        } else {
+          dispatch(addToCart(product));
+          toast.success(res.data.message);
+        }
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.error('Error updating cart:', error);
+      toast.error("Something went wrong! Try again.");
+    }
   };
+  
+  // Remove from cart handler,  remove product from cart and display success toast
+  // const handleRemoveFromCartBtn = (__id) => {
+  //   dispatch(removeFromCart(__id));  // Dispatch action to remove from Redux state
+  //   toast.success('Product removed from cart successfully');
+  // };
 
   // Add to wishlist handler
   const handleAddToWishlistBtn = (product) => {
@@ -51,25 +80,27 @@ function ProductCard({ product }) {
   };
 
   // Remove from wishlist handler
-  const handleRemoveFromWishlist = (id) => {
-    const updatedWishlist = wishlist.filter(item => item.id !== id);
+  const handleRemoveFromWishlist = (_id) => {
+    const updatedWishlist = wishlist.filter(item => item._id !== _id);
     setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
-    dispatch(removeFromWishlist(id));
+    l//ocalStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
+    dispatch(removeFromWishlist(_id));
     toast.success('Product removed from wishlist successfully');
   };
 
+
   // Sync cart with localStorage whenever the cart changes
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));  // Sync Redux cart state to localStorage
-  }, [cart.length]);  // Runs whenever the cart length changes
+  // useEffect(() => {
+  //   //localStorage.setItem('cart', JSON.stringify(cart));  // Sync Redux cart state to localStorage
+     
+  // }, [cart?.length]);  // Runs whenever the cart length changes
 
   return (
-    <div key={product?.id} className='products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]'>
+    <div key={product?.__id} className='products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]'>
     {/* Wishlist button toggles between add and remove */}
       {
-        wishlist?.find((i) => i.id === product.id) ? (
-          <button onClick={() => handleRemoveFromWishlist(product.id)} className="absolute top-1 right-1 text-lg px-2 py-3 rounded-sm mb-4">
+        wishlist?.find((i) => i._id === product._id) ? (
+          <button onClick={() => handleRemoveFromWishlist(product._id)} className="absolute top-1 right-1 text-lg px-2 py-3 rounded-sm mb-4">
             <IoIosHeart className='text-[red]' size={38} />
           </button>
         ) : (
@@ -89,22 +120,22 @@ function ProductCard({ product }) {
       <div>
         <p className='text-lg font-semibold text-violet-800 text-center'>{category}</p>
         <p className='text-sm font-semibold text-black'>{title.slice(0, 30)}...</p>
-        <p className='text-lg font-semibold text-black text-center'>${price}</p>
+        <p className='text-lg font-semibold text-black text-center'>₹{price}</p>
       </div>
 
       {/* Actions: View Product, Add/Remove from Cart */}
       <div className='flex flex-col gap-2'>
-        <NavLink to={`/product/${id}`} className='w-[100%] px-8 py-3 bg-[#41187F] text-white text-center rounded-lg'>View Product</NavLink>
+        <NavLink to={`/product/${_id}`} className='w-[100%] px-8 py-3 bg-[#41187F] text-white text-center rounded-lg'>View Product</NavLink>
         {
-          cart?.find((i) => i.id === id) ? (
-            <button onClick={() => handleRemoveFromCartBtn(product.id)} className='w-[100%] px-2 py-3 bg-[#41187F] text-white rounded-lg mb-4 flex justify-center items-center gap-2'>
+          <button onClick={() => handleAddToCartBtn(product)} className='w-[100%] px-2 py-3 bg-[#41187F] text-white rounded-lg mb-4 flex justify-center items-center gap-2'>
+          {allCart?.some(i => i?._id === _id) ? (
+            <>
               <RiDeleteBin6Line /> Remove From Cart
-            </button>
+            </>
           ) : (
-            <button onClick={() => handleAddToCartBtn(product)} className='w-[100%] px-2 py-3 bg-[#41187F] text-white rounded-lg mb-4'>
-              🛒 Add to Cart
-            </button>
-          )
+            <>🛒 Add to Cart</>
+          )}
+        </button>
         }
       </div>
     </div>

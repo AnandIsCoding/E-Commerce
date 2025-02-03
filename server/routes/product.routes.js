@@ -3,7 +3,7 @@ import express from "express"
 const productRouter = express.Router()
 
 // Import controllers
-import { addProductController, getProductController } from "../controllers/product.controller.js"
+import { addProductController, getProductByCategoryController, getProductController, getSingleProductController } from "../controllers/product.controller.js"
 
 
 
@@ -11,5 +11,9 @@ import { addProductController, getProductController } from "../controllers/produ
 productRouter.post('/add', addProductController)
 productRouter.get('/all', getProductController)
 
+// https://fakestoreapi.com/products/category/${category}
+
+productRouter.get('/category/:category', getProductByCategoryController)
+productRouter.get('/product/:_id', getSingleProductController)
 
 export default productRouter

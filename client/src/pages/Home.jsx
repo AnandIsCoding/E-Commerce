@@ -13,27 +13,49 @@ import WhatWeSell from "../components/WhatWeSell";
 import FAQs from "../components/FAQs";
 import Footer from "../components/Footer";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaBell } from "react-icons/fa";
+import { addToCart } from "../redux/slices/cartSlice";
+import ErrorBoundary from '../components/ErrorBoundary'
 
 function Home({ animateCategories, setAnimatecategories }) {
- 
+   const dispatch = useDispatch()
   // subscribe to wishlist and cart data from Redux store
   const cart = useSelector(state => state.cart)
   const wishlist = useSelector(state => state.wishlist);
+
+  const getAllCartProducts = async() => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/cart/products");
+        dispatch(addToCart(res.data.data))
+        
+      } catch (error) {
+        console.log("error in fetch cart products => ", error);
+        toast.error("Something went wrong");
+      }
+    };
+
+    useEffect(()=>{
+      getAllCartProducts()
+    },[])
+
+    useEffect(()=>{
+      getAllCartProducts()
+    },[cart])
 
   // Initialize states to manage cart and wishlist stored locally
   const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
   const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
   // Update local cart state whenever the Redux cart state changes
-  useEffect(()=>{    
-    setInlocal(JSON.parse(localStorage.getItem('cart')))
-  },[cart])
+  // useEffect(()=>{    
+  //   setInlocal(JSON.parse(localStorage.getItem('cart')))
+  // },[cart])
 
   // Update local wishlist state whenever the Redux wishlist state changes
   useEffect(()=>{    
+    // 
     setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
   },[wishlist])
 
@@ -44,18 +66,17 @@ function Home({ animateCategories, setAnimatecategories }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Fetch all products from API
-  const getAllProducts = async () => {
+  const getAllProducts = async() => {
     try {
-      const res = await axios.get("https://fakestoreapi.com/products");
-      setAllProducts(res.data);
-      setFilteredProducts(res.data);
-      //save received set of products in localstorage, in local storage we can't set normal object, we need to convert object to JSON string
-      localStorage.setItem("products", JSON.stringify(res.data));
+      const res = await axios.get("http://localhost:3000/api/v1/products/all");
+      setAllProducts(res.data.data);
+      setFilteredProducts(res.data.data);
     } catch (error) {
       console.log("error in fetch all products => ", error);
       toast.error("Something went wrong");
     }
   };
+  
 
   // filter on the basis on input value, in included in title or category
   const handleInputChange = (event) => {
@@ -71,12 +92,14 @@ function Home({ animateCategories, setAnimatecategories }) {
   };
 
   // Fetch products by category
+  //http://localhost:3000/api/v1/products/category/jewelery
   const handleCategory = async (category) => {
     try {
       const res = await axios.get(
-        `https://fakestoreapi.com/products/category/${category}`
+        `http://localhost:3000/api/v1/products/category/${category}`
       );
-      setFilteredProducts(res.data);
+      //data.data 
+      setFilteredProducts(res.data.data);
     } catch (error) {
       console.log("error in category handling ----> ", error);
     }
@@ -135,7 +158,7 @@ function Home({ animateCategories, setAnimatecategories }) {
               <FaCartPlus size={28} aria-hidden="true" />
               <p>Cart </p>
               <span className="text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-24  px-3 py-0 rounded-full">
-                {inlocal?.length}
+                {cart?.length}
               </span>
             </button>
 
@@ -160,8 +183,9 @@ function Home({ animateCategories, setAnimatecategories }) {
           {[
             "electronics",
             "jewelery",
-            "men's clothing",
-            "women's clothing",
+            "mens clothing",
+            "womens clothing",
+            "others"
           ].map((category) => (
             <h1
               key={category}
@@ -181,7 +205,7 @@ function Home({ animateCategories, setAnimatecategories }) {
       </div>
 
       {/* carousel */}
-      <div className="pt-[10.8vw]">
+      <div className="pt-[10.8vw] ">
         <Carousel />
       </div>
 
@@ -191,7 +215,9 @@ function Home({ animateCategories, setAnimatecategories }) {
           filteredProducts
             .slice(page * 5 - 5, page * 5)
             .map((product, index) => (
-              <ProductCard product={product} key={index} />
+              <ErrorBoundary key={index}>
+              <ProductCard product={product} key={product._id} />
+              </ErrorBoundary>
             ))
         ) : allProducts.length > 0 ? (
           <h1 className="w-full text-center text-lg font-bold text-[#41187F]">

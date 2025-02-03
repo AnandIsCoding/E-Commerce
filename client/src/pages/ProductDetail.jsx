@@ -65,8 +65,9 @@ function ProductDetail() {
   // Fetch product details from API
   const fetchProductDetails = async () => {
     try {
-      const res = await axios.get(`https://fakestoreapi.com/products/${id}`);
-      setProduct(res.data);
+      const res = await axios.get(`http://localhost:3000/api/v1/products/product/${id}`);
+      //console.log(`http://localhost:3000/api/v1/products/product/${id}`)
+      setProduct(res.data.data);
       setLoading(false);
     } catch (err) {
       console.error("Error fetching product details:", err);
@@ -127,7 +128,7 @@ function ProductDetail() {
             </p>
             {/* displaying star and rating, using Math.ceil upper round off the ration, and than map, .fill method gives error */}
             <p className="text-xl font-semibold text-blue-900 mt-4">
-              Ratings: {product?.rating.rate}
+              Ratings: {product?.rating?.rate}
               {Array.from({ length: Math.ceil(product?.rating?.rate) }).map(
                 (_, index) => {
                   return <span key={index}>⭐</span>;
@@ -208,7 +209,7 @@ function ProductDetail() {
                 🤍 Add to wishlist
               </button>
             )}
-            {cart.find((i) => i.id === product.id) ? (
+            {cart?.find((i) => i.id === product?.id) ? (
               <button
                 onClick={() => handleRemoveFromCartBtn(product.id)}
                 className="md:w-[33.33%] text-lg px-2 py-3 border-2  border-zinc-300 hover:border-[#41187F] hover:text-[#41187F] text-black rounded-sm mb-4 flex items-center justify-center gap-2"

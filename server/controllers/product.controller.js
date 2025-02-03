@@ -32,3 +32,25 @@ export const getProductController = async(req,res) =>{
     }
 }
 
+
+export const getProductByCategoryController = async(req,res) =>{
+    try {
+        const {category} = req.params
+        const data = await productModel.find({category:category})
+        return res.status(200).json({success:true, message:'products fetched successfully for category'+ category, data:data})
+    } catch (error) {
+        console.log(chalk.bgRedBright('Error in getProductByCategoryController =>> ',error))
+        res.status(500).json({success:false, message:'Internal Server Error'})
+    }
+}
+
+export const getSingleProductController = async(req,res) =>{
+    try {
+        const {_id} = req.params
+        const data = await productModel.findOne({_id:_id})
+        return res.status(200).json({success:true, message:'Signle product fetched successfully', data:data})
+    } catch (error) {
+        console.log(chalk.bgRedBright('Error in getSingleProductController =>> ',error))
+        res.status(500).json({success:false, message:'Internal Server Error'})
+    }
+}
