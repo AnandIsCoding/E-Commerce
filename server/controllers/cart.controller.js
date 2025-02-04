@@ -8,7 +8,7 @@ export const addRemoveCartController = async(req,res) =>{
         if (! _id) return res.status(400).json({ message: "Product ID is required to add product in cart" });
 
         let cart = await cartModel.findOne();
-        if (!cart) cart = new cartModel({ items: [] });
+        if (!cart) cart = new cartModel({items:[]});
 
         const exists = cart.items.some(item => item._id.toString() === _id)
 

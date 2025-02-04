@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
 const wishlistSchema = new mongoose.Schema({
     items:[
-        {_id:mongoose.Schema.Types.ObjectId, ref:"Product", required:true}
+        {
+            _id:{type:mongoose.Schema.Types.ObjectId, ref:"Product", required:true}
+        }
     ]
 },{timestamps:true})
 

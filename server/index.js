@@ -6,6 +6,7 @@ import chalk from 'chalk'
 import connectToDb from './config/database.config.js'
 import productRouter from './routes/product.routes.js'
 import cartRouter from './routes/cart.routes.js'
+import wishlistRouter from './routes/wishlist.routes.js'
 
 dotenv.config()
 
@@ -23,6 +24,7 @@ app.use(cors({
 //routes
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
+app.use('/api/v1/wishlist', wishlistRouter)
 
 connectToDb().then(()=>{
     console.log(chalk.bgMagenta('Connected to MongoDB Database successfully 🫰'))
