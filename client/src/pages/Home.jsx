@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { FaBell } from "react-icons/fa";
 import { addToCart } from "../redux/slices/cartSlice";
 import ErrorBoundary from '../components/ErrorBoundary'
+import { addToWishlist } from "../redux/slices/wishlistSlice";
 
 function Home({ animateCategories, setAnimatecategories }) {
    const dispatch = useDispatch()
@@ -36,25 +37,44 @@ function Home({ animateCategories, setAnimatecategories }) {
       }
     };
 
+
+    const getAllWishlistProducts = async() => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/wishlist/products");
+        dispatch(addToWishlist(res.data.data))
+        
+      } catch (error) {
+        console.log("error in fetch wishlist products in home.jsx ======>> ", error);
+        toast.error("Something went wrong");
+      }
+    };
+
+    
+
     useEffect(()=>{
       getAllCartProducts()
+      getAllWishlistProducts()
     },[])
 
     useEffect(()=>{
       getAllCartProducts()
     },[cart?.length])
 
+    useEffect(()=>{
+      getAllWishlistProducts()
+    },[wishlist?.length])
+
   // Initialize states to manage cart and wishlist stored locally
   //const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
-  const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
+  //const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
  
 
   // Update local wishlist state whenever the Redux wishlist state changes
-  useEffect(()=>{    
-    // 
-    setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
-  },[wishlist])
+  // useEffect(()=>{    
+  //   // 
+  //   setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
+  // },[wishlist])
 
 
   const navigate = useNavigate();
@@ -102,18 +122,9 @@ function Home({ animateCategories, setAnimatecategories }) {
     }
   };
 
-  // Load products from local storage or fetch them if not available
+  // Load products  fetch 
   useEffect(() => {
-    const savedProducts = localStorage.getItem("products");
-    if (savedProducts) {
-      // If products exist in local storage, use them
-      const parsedProducts = JSON.parse(savedProducts);
-      setAllProducts(parsedProducts);
-      setFilteredProducts(parsedProducts);
-    } else {
-      // If no products in local storage, fetch from API
-      getAllProducts();
-    }
+    getAllProducts()
   }, []);
 
   return (
@@ -166,7 +177,7 @@ function Home({ animateCategories, setAnimatecategories }) {
               <FaRegHeart size={28} aria-hidden="true" />
               <p>Wishlist</p>
               <span className="text-xl font-extrabold absolute bottom-10 bg-violet-800 text-white right-14  px-3 py-0 rounded-full">
-                {inLocalWish?.length}
+                {wishlist?.length}
               </span>
             </button>
           </div>

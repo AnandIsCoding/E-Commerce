@@ -13,11 +13,11 @@ function MobileOption({setAnimatecategories}) {
 
    // Subscribe to the Redux store to access cart and wishlist data
    const cart = useSelector(state => state.cart) 
-   const wishlist = useSelector((state) => state.wishlist)  ;
+   const wishlist = useSelector((state) => state.wishlist) ;
 
     // State for tracking the local cart and wishlist data
 //  const [inlocalcart, setInlocalcart] = useState(JSON.parse(localStorage.getItem('cart')))
- const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
+ //const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
  // Update local cart state when the Redux cart state changes
 //  useEffect(()=>{   
@@ -25,9 +25,9 @@ function MobileOption({setAnimatecategories}) {
 //  },[cart])
 
 // Update local wishlist state when the Redux wishlist state changes
- useEffect(()=>{    
-   setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
- },[wishlist])
+//  useEffect(()=>{    
+//    setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
+//  },[wishlist])
 
 
 
@@ -66,7 +66,7 @@ function MobileOption({setAnimatecategories}) {
         {/* Wishlist Button */}
       <button aria-label="Wishlist" onClick={()=>navigate('/wishlist')}>
         <FaRegHeart size={32} aria-hidden="true"  />
-        <p> WishList <span>{inLocalWish?.length}</span> </p>
+        <p> WishList <span>{wishlist?.length}</span> </p>
       </button>
     </nav>
   );

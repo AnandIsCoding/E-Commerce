@@ -12,7 +12,7 @@ function Cart() {
    const [allCart, setAllCart] = useState([])
   const cart = useSelector(state => state.cart)
   // creating local state for cart so that when removed from cart from cart page than product card disappear
-   const [cartLocal,setCartLocal] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+   //const [cartLocal,setCartLocal] = useState(JSON.parse(localStorage.getItem('cart')) || [])
   const navigate = useNavigate();
   // using reduce finding total sum of price of products in cart
   const [totalOfproduct, setTotalofproduct] = useState(
@@ -42,17 +42,20 @@ function Cart() {
         const isInCart = cart.some(item => item._id === id);
         if (isInCart) {
           dispatch(removeFromCart(id));
-          s
+          
           toast.success(res.data.message);
         } 
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.error("Error updating cart:", error);
+      console.error("Error updating cart cart.jsx =>>>:", error);
       toast.error("Something went wrong! Try again.");
     }
   };
+
+
+  
   
 
   const handleDecrement = (event, id) => {

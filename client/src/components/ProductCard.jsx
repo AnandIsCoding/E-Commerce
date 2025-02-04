@@ -17,7 +17,9 @@ function ProductCard({ product }) {
 
   // Subscribe to the Redux store to access cart and wishlist data
   const [allCart, setAllCart] = useState([]);
+  const [allWishlist, setAllwishlist] = useState([])
   const cart = useSelector((state) => state.cart);
+  const wishlist = useSelector((state) => state.wishlist);
 
   useEffect(() => {
     if (Array.isArray(cart)) {
@@ -28,6 +30,14 @@ function ProductCard({ product }) {
   }, [cart]); // Ensure this runs when cart changes
 
   useEffect(() => {
+    if (Array.isArray(wishlist)) {
+      setAllwishlist(wishlist?.map((item) => item._id)); // Set cart data properly if it's an array
+    } else {
+      setAllwishlist([]); // Fallback to an empty array if cart is not an array
+    }
+  }, [wishlist]); // Ensure this runs when wishlist changes
+
+  useEffect(() => {
     if (Array(cart)) {
       setAllCart(cart?.map((item) => item._id)); // Initialize allCart with product IDs from Redux state
     } else {
@@ -36,15 +46,14 @@ function ProductCard({ product }) {
   }, []);
 
   // Local state for wishlist management
-  const [wishlist, setWishlist] = useState([]);
+  //const [wishlist, setWishlist] = useState([]);
 
-  //  // Fetch wishlist from localStorage when the component mounts
+  //  // Fetch wishlist  when the component mounts
   useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    if (Array.isArray(storedWishlist)) {
-      setWishlist(storedWishlist);
+    if (Array(wishlist)) {
+      setAllwishlist(wishlist?.map((item) => item._id)); // Initialize allCart with product IDs from Redux state
     } else {
-      setWishlist([]); // Fallback an empty array if data is inval_id
+      setAllwishlist([]); // If cart is null or undefined, set an empty array
     }
   }, []); // Empty dependency array to run once
 
@@ -58,7 +67,7 @@ function ProductCard({ product }) {
 
       if (res.data.success) {
         // Check if item exists in the cart and toggle accordingly
-        const isInCart = cart.some((item) => item._id === _id);
+        const isInCart = cart?.some((item) => item._id === _id);
         if (isInCart) {
           dispatch(removeFromCart(product._id)); // Remove from cart
           setAllCart((prev) => prev.filter((id) => id !== product._id)); // Update local cart state
@@ -76,7 +85,34 @@ function ProductCard({ product }) {
       toast.error("Something went wrong! Try again.");
     }
   };
+  
+  const handleAddToWishlistBtn = async (product) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/wishlist/add-remove",
+        { _id: product._id }
+      );
 
+      if (res.data.success) {
+        // Check if item exists in the cart and toggle accordingly
+        const isInWishlist = wishlist.some((item) => item._id === _id);
+        if (isInWishlist) {
+          dispatch(removeFromCart(product._id)); // Remove from cart
+          setAllwishlist((prev) => prev.filter((id) => id !== product._id)); // Update local cart state
+          toast.success(res.data.message);
+        } else {
+          dispatch(addToWishlist(product)); // Add to cart
+          setAllwishlist((prev) => [...prev, product._id]); // Update local cart state
+          toast.success(res.data.message);
+        }
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating wishlist", error);
+      toast.error("Something went wrong! Try again.");
+    }
+  };
   // Remove from cart handler,  remove product from cart and display success toast
   // const handleRemoveFromCartBtn = (__id) => {
   //   dispatch(removeFromCart(__id));  // Dispatch action to remove from Redux state
@@ -84,22 +120,22 @@ function ProductCard({ product }) {
   // };
 
   // Add to wishlist handler
-  const handleAddToWishlistBtn = (product) => {
-    const updatedWishlist = [...wishlist, product];
-    setWishlist(updatedWishlist);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Save updated wishlist to localStorage
-    dispatch(addToWishlist(product));
-    toast.success("Product added to wishlist successfully");
-  };
+  // const handleAddToWishlistBtn = (product) => {
+  //   const updatedWishlist = [...wishlist, product];
+  //   setWishlist(updatedWishlist);
+  //   localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Save updated wishlist to localStorage
+  //   dispatch(addToWishlist(product));
+  //   toast.success("Product added to wishlist successfully");
+  // };
 
-  // Remove from wishlist handler
-  const handleRemoveFromWishlist = (_id) => {
-    const updatedWishlist = wishlist.filter((item) => item._id !== _id);
-    setWishlist(updatedWishlist);
-    l; //ocalStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
-    dispatch(removeFromWishlist(_id));
-    toast.success("Product removed from wishlist successfully");
-  };
+  // // Remove from wishlist handler
+  // const handleRemoveFromWishlist = (_id) => {
+  //   const updatedWishlist = wishlist.filter((item) => item._id !== _id);
+  //   setWishlist(updatedWishlist);
+  //   l; //ocalStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
+  //   dispatch(removeFromWishlist(_id));
+  //   toast.success("Product removed from wishlist successfully");
+  // };
 
   // Sync cart with localStorage whenever the cart changes
   // useEffect(() => {
@@ -113,9 +149,9 @@ function ProductCard({ product }) {
       className="products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]"
     >
       {/* Wishlist button toggles between add and remove */}
-      {wishlist?.find((i) => i._id === product._id) ? (
+      {allWishlist?.find((i) => i._id === product._id) ? (
         <button
-          onClick={() => handleRemoveFromWishlist(product._id)}
+          onClick={() => handleAddToWishlistBtn(product)}
           className="absolute top-1 right-1 text-lg px-2 py-3 rounded-sm mb-4"
         >
           <IoIosHeart className="text-[red]" size={38} />
