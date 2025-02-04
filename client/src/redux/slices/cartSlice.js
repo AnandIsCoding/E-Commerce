@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //initially if available in localstorage than that otherwise empty []
 
-const storedCart = null;
+const storedCart = [];
 
 const cartSlice = createSlice({
   name: "cart",

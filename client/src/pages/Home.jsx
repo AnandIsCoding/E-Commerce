@@ -42,16 +42,13 @@ function Home({ animateCategories, setAnimatecategories }) {
 
     useEffect(()=>{
       getAllCartProducts()
-    },[cart])
+    },[cart?.length])
 
   // Initialize states to manage cart and wishlist stored locally
-  const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
+  //const [inlocal, setInlocal] = useState(JSON.parse(localStorage.getItem('cart')))
   const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
-  // Update local cart state whenever the Redux cart state changes
-  // useEffect(()=>{    
-  //   setInlocal(JSON.parse(localStorage.getItem('cart')))
-  // },[cart])
+ 
 
   // Update local wishlist state whenever the Redux wishlist state changes
   useEffect(()=>{    

@@ -5,7 +5,7 @@ import productModel from '../models/product.model.js';
 export const addRemoveCartController = async(req,res) =>{
     try {
         const {_id} = req.body
-        if (! _id) return res.status(400).json({ message: "Product ID is required" });
+        if (! _id) return res.status(400).json({ message: "Product ID is required to add product in cart" });
 
         let cart = await cartModel.findOne();
         if (!cart) cart = new cartModel({ items: [] });
@@ -19,7 +19,7 @@ export const addRemoveCartController = async(req,res) =>{
         }
 
         await cart.save();
-        return res.json({ message: exists ? "Product removed from cart" : "Product added to cart", data:cart });
+        return res.status(200).json({success:true, message: exists ? "Product removed from cart" : "Product added to cart", data:cart });
 
 
     } catch (error) {
