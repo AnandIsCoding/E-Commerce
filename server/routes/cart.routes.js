@@ -11,7 +11,7 @@ import { addRemoveCartController, getCartController } from '../controllers/cart.
  * /api/v1/cart/add-remove:
  *   post:
  *     summary: Add or Remove item from cart
- *     description: Toggles a product in the cart (add if not exists, remove if already exists).
+ *     description: Toggles a product in the cart (adds if not exists, removes if already exists).
  *     requestBody:
  *       required: true
  *       content:
@@ -19,13 +19,26 @@ import { addRemoveCartController, getCartController } from '../controllers/cart.
  *           schema:
  *             type: object
  *             properties:
- *               productId:
+ *               _id:
  *                 type: string
- *                 description: The ID of the product
+ *                 description: The ID of the product to be added or removed
+ *                 example: "60d21b4667d0d8992e610c85"
  *     responses:
  *       200:
- *         description: Product added/removed from cart successfully
+ *         description: Product successfully added or removed from cart
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Product added to cart successfully" 
  */
+
 cartRouter.post('/add-remove', addRemoveCartController);
 
 /**

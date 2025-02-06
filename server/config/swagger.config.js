@@ -13,7 +13,7 @@ const options = {
         info: {
             title: "📘 AB E-commerce API",
             version: "1.0.0",
-            description: "🔖 API documentation for Almabetter E-commerce project ",
+            description: "🔖 API documentation for Almabetter module 4 E-commerce project ",
         },
         servers: [
             { url: "http://localhost:3000" } // Change this after hosting

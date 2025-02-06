@@ -22,19 +22,86 @@ import {
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               title:
  *                 type: string
- *                 description: Name of the product
+ *                 description: Title of the product (5-50 characters)
+ *                 example: "Smartphone X"
  *               price:
  *                 type: number
- *                 description: Price of the product
+ *                 description: Price of the product (Minimum 5 rupees)
+ *                 example: 9999
+ *               description:
+ *                 type: string
+ *                 description: Description of the product (Min 5 characters)
+ *                 example: "A high-quality smartphone with excellent features."
  *               category:
  *                 type: string
  *                 description: Category of the product
+ *                 enum: ["electronics", "jewelery", "mens clothing", "womens clothing", "others"]
+ *                 example: "electronics"
+ *               image:
+ *                 type: string
+ *                 description: URL of the product image
+ *                 example: "https://example.com/product.jpg"
+ *               rating:
+ *                 type: object
+ *                 properties:
+ *                   rate:
+ *                     type: number
+ *                     minimum: 1
+ *                     maximum: 5
+ *                     description: Product rating (1 to 5)
+ *                     example: 4.5
+ *                   count:
+ *                     type: number
+ *                     description: Number of reviews
+ *                     example: 120
  *     responses:
  *       201:
  *         description: Product added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Product added successfully"
+ *                 product:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "60d21b4667d0d8992e610c85"
+ *                     title:
+ *                       type: string
+ *                       example: "Smartphone X"
+ *                     price:
+ *                       type: number
+ *                       example: 9999
+ *                     description:
+ *                       type: string
+ *                       example: "A high-quality smartphone with excellent features."
+ *                     category:
+ *                       type: string
+ *                       example: "electronics"
+ *                     image:
+ *                       type: string
+ *                       example: "https://example.com/product.jpg"
+ *                     rating:
+ *                       type: object
+ *                       properties:
+ *                         rate:
+ *                           type: number
+ *                           example: 4.5
+ *                         count:
+ *                           type: number
+ *                           example: 120
  */
+
 productRouter.post('/add', addProductController);
 
 /**
