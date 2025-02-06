@@ -16,7 +16,7 @@ const options = {
             description: "🔖 API documentation for Almabetter module 4 E-commerce project ",
         },
         servers: [
-            { url: "http://localhost:3000" } // Change this after hosting
+            { url: "https://almacommerce.onrender.com" } // Change this after hosting
         ],
     },
     apis: [path.join(__dirname, "../routes/*.routes.js")], // Correct path to route folder
@@ -26,7 +26,7 @@ const swaggerSpec = swaggerJSDoc(options);
 
 export const swaggerDocs = (app) => {
     app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-    console.log("Swagger documentation available at http://localhost:3000/api-docs");
+    console.log("Swagger documentation available at https://almacommerce.onrender.com/api-docs");
 };
 
 export default swaggerDocs

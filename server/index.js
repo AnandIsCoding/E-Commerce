@@ -24,11 +24,25 @@ const PORT = process.env.SERVER_PORT || 7000
 //middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials:true
-}))
 
+
+
+// CORS configuration
+const allowedOrigins = ["https://almacommerce.onrender.com", "http://localhost:3000"];
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+};
+app.use(cors(corsOptions));
+
+
+// frontend deployed url :  https://almacommerce.onrender.com/
 
 
 //routes

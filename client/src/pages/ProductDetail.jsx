@@ -65,8 +65,8 @@ function ProductDetail() {
   // Fetch product details from API
   const fetchProductDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/v1/products/product/${id}`);
-      //console.log(`http://localhost:3000/api/v1/products/product/${id}`)
+      const res = await axios.get(`https://almacommerce.onrender.com/api/v1/products/product/${id}`);
+      //local debug purpose : console.log(`http://localhost:3000/api/v1/products/product/${id}`)
       setProduct(res.data.data);
       setLoading(false);
     } catch (err) {

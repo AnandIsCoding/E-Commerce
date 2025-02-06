@@ -36,7 +36,7 @@ function Cart() {
     event.stopPropagation(); // Ensure event doesn't propagate to parent elements
   
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/cart/add-remove", { _id: id });
+      const res = await axios.post("https://almacommerce.onrender.com/api/v1/cart/add-remove", { _id: id });
       setAllCart(prev => prev.filter(item => item._id !== id));  //update ui
       if (res.data.success) {
         const isInCart = cart.some(item => item._id === id);

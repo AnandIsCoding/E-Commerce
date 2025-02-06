@@ -42,7 +42,7 @@ function Wishlist() {
           // Ensure event doesn't propagate to parent elements
          event.stopPropagation();        
           try {
-            const res = await axios.post("http://localhost:3000/api/v1/wishlist/add-remove", { _id: id });
+            const res = await axios.post("https://almacommerce.onrender.com/api/v1/wishlist/add-remove", { _id: id });
             setAllwishlist(prev => prev.filter(item => item._id !== id));  //update ui
             if (res.data.success) {
               const isInWishlist = wishlist.some(item => item._id === id);

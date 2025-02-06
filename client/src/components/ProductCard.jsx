@@ -61,7 +61,7 @@ function ProductCard({ product }) {
   const handleAddToCartBtn = async (product) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/cart/add-remove",
+        "https://almacommerce.onrender.com/api/v1/cart/add-remove",
         { _id: product._id }
       );
 
@@ -89,7 +89,7 @@ function ProductCard({ product }) {
   const handleAddToWishlistBtn = async (product) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/wishlist/add-remove",
+        "https://almacommerce.onrender.com/api/v1/wishlist/add-remove",
         { _id: product._id }
       );
 

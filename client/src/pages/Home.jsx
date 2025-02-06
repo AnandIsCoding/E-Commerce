@@ -28,7 +28,7 @@ function Home({ animateCategories, setAnimatecategories }) {
 
   const getAllCartProducts = async() => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/cart/products");
+        const res = await axios.get("https://almacommerce.onrender.com/api/v1/cart/products");
         dispatch(addToCart(res.data.data))
         
       } catch (error) {
@@ -40,7 +40,7 @@ function Home({ animateCategories, setAnimatecategories }) {
 
     const getAllWishlistProducts = async() => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/wishlist/products");
+        const res = await axios.get("https://almacommerce.onrender.com/api/v1/wishlist/products");
         dispatch(addToWishlist(res.data.data))
         
       } catch (error) {
@@ -85,7 +85,7 @@ function Home({ animateCategories, setAnimatecategories }) {
   // Fetch all products from API
   const getAllProducts = async() => {
     try {
-      const res = await axios.get("http://localhost:3000/api/v1/products/all");
+      const res = await axios.get("https://almacommerce.onrender.com/api/v1/products/all");
       setAllProducts(res.data.data);
       setFilteredProducts(res.data.data);
     } catch (error) {
@@ -109,11 +109,10 @@ function Home({ animateCategories, setAnimatecategories }) {
   };
 
   // Fetch products by category
-  //http://localhost:3000/api/v1/products/category/jewelery
   const handleCategory = async (category) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/v1/products/category/${category}`
+        `https://almacommerce.onrender.com/api/v1/products/category/${category}`
       );
       //data.data 
       setFilteredProducts(res.data.data);
