@@ -8,7 +8,7 @@ const DATABASE_URI = process.env.DATABASE_URI;
 
 const connectToDb = async() =>{
     try {
-        await mongoose.connect(DATABASE_URI)
+        await mongoose.connect(DATABASE_URI,{serverSelectionTimeoutMS: 60000})
     } catch (error) {
         console.log(chalk.bgMagenta('Error in monnecting to database cluster file --> config/database.config.js ==>>  : ' + error.message))
     }
