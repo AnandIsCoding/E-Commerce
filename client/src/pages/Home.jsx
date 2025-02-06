@@ -127,13 +127,13 @@ function Home({ animateCategories, setAnimatecategories }) {
   }, []);
 
   return (
-    <div className="w-[100vw] h-screen">
+    <div className="w-full h-screen">
       {/* complete navbar searchbar etc */}
 
       <div className="w-full fixed z-[999] bg-white ">
         <Navbar />
         {/* search bar for all screen and   cart wishlist icon for big screen */}
-        <div className="pl-0 pr-1 md:pr-3 w-full py-2 flex justify-between relative ">
+        <div className="w-full pl-0 pr-1 md:pr-3  py-2 flex justify-between relative ">
           <div className="w-[10%] md:w-[6%] h-full  bg-black absolute top-5 md:top-4">
             <img
               src="/logo.png"
@@ -212,7 +212,7 @@ function Home({ animateCategories, setAnimatecategories }) {
       </div>
 
       {/* carousel */}
-      <div className="pt-[10.8vw] ">
+      <div className="w-full pt-[10.8vw] ">
         <Carousel />
       </div>
 

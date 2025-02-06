@@ -146,7 +146,7 @@ function ProductCard({ product }) {
   return (
     <div
       key={product?.__id}
-      className="products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 p-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]"
+      className="products transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-shrink-0 w-[45%] md:w-[18%] pb-0 py-2 md:px-2 md:pt-4 rounded-md relative overflow-y-scroll md:h-[60vh]"
     >
       {/* Wishlist button toggles between add and remove */}
       {allWishlist?.find((i) => i._id === product._id) ? (

@@ -4,7 +4,7 @@ import { FaAnglesRight } from "react-icons/fa6";  // Icon for the right arrow
 
 function Pagination({ allProducts, page, setPage }) {
   return (
-    <div className="w-full  mb-4 flex items-center md:justify-center md:gap-x-3 mt-10  ">
+    <div className="w-full  mb-4 flex flex-wrap items-center md:justify-center md:gap-x-2 mt-10 px-4 ">
    
 
        {/* Previous Button */}
@@ -20,7 +20,7 @@ function Pagination({ allProducts, page, setPage }) {
 
            {/* Page Numbers */}
       <div className="bg-white h-ful flex gap-x-8">
-        {[...Array(Math.ceil(allProducts?.length / 5))].map((_, index) => {
+        {[...Array(Math.ceil(allProducts?.length / 6))].map((_, index) => {
           return (
             <button
               key={index}

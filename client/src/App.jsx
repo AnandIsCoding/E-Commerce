@@ -28,7 +28,7 @@ function App() {
   
   const [animateCategories, setAnimatecategories] = useState(false);
   return (
-    <div onContextMenu={disableContextMenu}>
+    <div onContextMenu={disableContextMenu} className="w-screen">
       <Suspense
       // Fallback loader while components are loading
         fallback={

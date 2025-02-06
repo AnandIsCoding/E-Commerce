@@ -28,7 +28,7 @@ function Carousel() {
   }, [handleIncrement]);
   
   return (
-    <div className='w-full h-[60vh] md:h-[64vh] overflow-hidden  bg-[#9183eb] relative'>
+    <div className='w-screen h-[60vh] md:h-[64vh] overflow-hidden  bg-[#9183eb] relative'>
     {/* Display the current image */}
       <img src={data[index].url} alt={`carousel_image_${index}`} className='w-full h-full object-top' />
 

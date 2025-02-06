@@ -34,7 +34,7 @@ function MobileOption({setAnimatecategories}) {
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="fixed bottom-0 left-0 right-0 md:hidden w-full px-2 pt-4 pb-1 text-white bg-[#41187F] z-[1] flex justify-between"
+      className="w-screen fixed bottom-0 left-0 right-0 md:hidden px-2 pt-4 pb-1 text-white bg-[#41187F] z-[1] flex justify-between"
     >
 
      {/* Home Button onClick navigate to home */}
