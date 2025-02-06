@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [
     "node",
@@ -14,7 +16,7 @@
     "mongoose",
     "js",
     "mern",
-    "ec-mmerce",
+    "ecommerce",
     "web"
   ],
   "author": "Anand jha",
