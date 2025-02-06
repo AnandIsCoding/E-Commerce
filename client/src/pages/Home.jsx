@@ -127,7 +127,7 @@ function Home({ animateCategories, setAnimatecategories }) {
   }, []);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-[100vw] h-screen">
       {/* complete navbar searchbar etc */}
 
       <div className="w-full fixed z-[999] bg-white ">
