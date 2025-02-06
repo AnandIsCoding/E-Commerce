@@ -23,7 +23,7 @@ export const addRemoveCartController = async(req,res) =>{
 
 
     } catch (error) {
-        console.log(chalk.bgRed('Error in addRemoveCartController ---->> ',error))
+        console.error(chalk.bgRed('Error in addRemoveCartController ---->> ',error))
         res.status(500).json({success:false,message:'Internal Server Error'})
     }
 }
@@ -49,7 +49,7 @@ export const getCartController = async (req, res) => {
     });
     
   } catch (error) {
-    console.log(chalk.bgRed('Error in getCartController ---->> ', error));
+    console.error(chalk.bgRed('Error in getCartController ---->> ', error));
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };

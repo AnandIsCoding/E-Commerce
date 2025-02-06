@@ -22,7 +22,7 @@ export const addToWishlistController = async(req,res) =>{
     
     
     } catch (error) {
-        console.log(chalk.bgRedBright('Error in addToWishlistController ------>>> ', error))
+        console.error(chalk.bgRedBright('Error in addToWishlistController ------>>> ', error))
         return res.status(500).json({success:false, message:'Internal Server Error'})
     }
 }
@@ -48,7 +48,7 @@ export const getWishlistController = async (req, res) => {
       });
       
     } catch (error) {
-      console.log(chalk.bgRed('Error in getWishlistController ---->> ', error));
+      console.error(chalk.bgRed('Error in getWishlistController ---->> ', error));
       return res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
   };

@@ -36,6 +36,6 @@ connectToDb().then(()=>{
         console.log(chalk.bgGreenBright(`🚀 Server is listening at http://localhost:${PORT}`))
     })
 }).catch((error)=>{
-    console.log(chalk.bgRed('❌Error in connecting to MongoDB Database :'+ error.message))
+    console.error(chalk.bgRed('❌Error in connecting to MongoDB Database :'+ error.message))
     process.exit(1)  // exit the process with an error status code 1
 })
