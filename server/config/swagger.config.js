@@ -13,7 +13,7 @@ const options = {
         info: {
             title: "📘 AB E-commerce API",
             version: "1.0.0",
-            description: "🔖 API documentation for Almabetter module 4 E-commerce project ",
+            description: "🔖 API documentation for Almabetter module 4 E-commerce project, demo id: 679e57e9eb55a0a3cecd1e46 ",
         },
         servers: [
             { url: "https://almacommerce.onrender.com" } // Change this after hosting

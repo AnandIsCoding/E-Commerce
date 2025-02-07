@@ -48,7 +48,7 @@ export const getSingleProductController = async(req,res) =>{
     try {
         const {_id} = req.params
         const data = await productModel.findOne({_id:_id})
-        return res.status(200).json({success:true, message:'Signle product fetched successfully', data:data})
+        return res.status(200).json({success:true, message:'Single product fetched by Id successfully', data:data})
     } catch (error) {
         console.error(chalk.bgRedBright('Error in getSingleProductController =>> ',error))
         res.status(500).json({success:false, message:'Internal Server Error'})
