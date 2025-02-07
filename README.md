@@ -93,10 +93,6 @@ This e-commerce platform allows users to browse products, add them to their wish
 1. **Clone the repository**  
    ```bash
    git clone https://github.com/AnandIsCoding/E-Commerce
-
-
----
-
    
 2. Navigate to the client directory:
    ```bash
