@@ -32,11 +32,10 @@ You can view the Google Docs file, which includes a summary, useful links, etc.:
 5. [API Endpoints](#api-endpoints)
 6. [Usage](#usage)
 7. [Screenshots](#screenshots)
-8. [Folder Structure](#folder-structure)
-9. [Testing](#testing)
-10. [Challenges Faced](#challenges-faced)
-11. [Future Enhancements](#future-enhancements)
-12. [Acknowledgments](#acknowledgments)
+8. [Testing](#testing)
+9. [Challenges Faced](#challenges-faced)
+10. [Future Enhancements](#future-enhancements)
+11. [Acknowledgments](#acknowledgments)
 
 ---
 
