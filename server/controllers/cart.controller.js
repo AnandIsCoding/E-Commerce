@@ -2,6 +2,8 @@ import chalk from 'chalk'
 import cartModel from '../models/cart.model.js';
 import productModel from '../models/product.model.js'; 
 
+
+//controller to add or remove product from cart
 export const addRemoveCartController = async(req,res) =>{
     try {
         const {_id} = req.body
@@ -10,8 +12,10 @@ export const addRemoveCartController = async(req,res) =>{
         let cart = await cartModel.findOne();
         if (!cart) cart = new cartModel({items:[]});
 
+        // check if _id already existes in cart
         const exists = cart.items.some(item => item._id.toString() === _id)
 
+        // Remove the product if it exists; otherwise, add it to the cart
         if (exists) {
             cart.items = cart.items.filter(item => item._id.toString() !== _id);
         } else {
@@ -30,7 +34,7 @@ export const addRemoveCartController = async(req,res) =>{
 
 
 
-
+// Controller to fetch cart details with populated product data
 export const getCartController = async (req, res) => {
   try {
     // Find the cart and populate the items array with product details

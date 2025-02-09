@@ -15,19 +15,7 @@ function MobileOption({setAnimatecategories}) {
    const cart = useSelector(state => state.cart) 
    const wishlist = useSelector((state) => state.wishlist) ;
 
-    // State for tracking the local cart and wishlist data
-//  const [inlocalcart, setInlocalcart] = useState(JSON.parse(localStorage.getItem('cart')))
- //const [inLocalWish, setInlocalWish] = useState(JSON.parse(localStorage.getItem('wishlist')))
 
- // Update local cart state when the Redux cart state changes
-//  useEffect(()=>{   
-//    setInlocalcart(JSON.parse(localStorage.getItem('cart')))
-//  },[cart])
-
-// Update local wishlist state when the Redux wishlist state changes
-//  useEffect(()=>{    
-//    setInlocalWish(JSON.parse(localStorage.getItem('wishlist')))
-//  },[wishlist])
 
 
 

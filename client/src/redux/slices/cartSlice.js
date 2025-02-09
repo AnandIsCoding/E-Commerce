@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//initially if available in localstorage than that otherwise empty []
+//initially []
 
 const storedCart = [];
 
@@ -10,8 +10,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       // state means cart [] push product which will come from action.payload
-       return action.payload // Replace state with the new data
-      
+       return action.payload // Replace state with the new data     
        
     },
     removeFromCart: (state, action) => {

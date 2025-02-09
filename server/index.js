@@ -1,24 +1,30 @@
+// Import required modules
 import express from 'express'
 import cors from 'cors'
-import dotenv from 'dotenv'
-import chalk from 'chalk'
+import dotenv from 'dotenv' // Dotenv to load environment variables
+import chalk from 'chalk'   // Chalk for colored console logs
 import path from 'path'
 import { fileURLToPath } from 'url';
 
 // Import Swagger documentation configuration file
 import swaggerDocs from './config/swagger.config.js'
+
+// Import database connection configuration file
 import connectToDb from './config/database.config.js'
+
+// Import routes routers
 import productRouter from './routes/product.routes.js'
 import cartRouter from './routes/cart.routes.js'
 import wishlistRouter from './routes/wishlist.routes.js'
 
+// Load environment variables from .env file
 dotenv.config()
 
 const app = express()
 swaggerDocs(app); // Initialize Swagger
 
 
-
+// SERVER PORT 
 const PORT = process.env.SERVER_PORT || 7000
 
 //middlewares
@@ -45,7 +51,7 @@ app.use(cors(corsOptions));
 // frontend deployed url :  https://almacommerce.onrender.com/
 
 
-//routes
+// all routes
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/wishlist', wishlistRouter)

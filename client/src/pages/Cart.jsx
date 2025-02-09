@@ -11,8 +11,7 @@ function Cart() {
    // Subscribe to the cart state from Redux store
    const [allCart, setAllCart] = useState([])
   const cart = useSelector(state => state.cart)
-  // creating local state for cart so that when removed from cart from cart page than product card disappear
-   //const [cartLocal,setCartLocal] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+  
   const navigate = useNavigate();
   // using reduce finding total sum of price of products in cart
   const [totalOfproduct, setTotalofproduct] = useState(

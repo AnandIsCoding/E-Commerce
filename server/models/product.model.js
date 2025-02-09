@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Define Product schema 
 const productSchema = new mongoose.Schema({
    title: {
       type: String,
@@ -43,5 +44,6 @@ const productSchema = new mongoose.Schema({
    }
 });
 
+// Create Product model
 const productModel = mongoose.model('Product', productSchema);
 export default productModel;

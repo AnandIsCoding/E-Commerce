@@ -16,22 +16,10 @@ function Wishlist() {
   const wishlist = useSelector((state) => state.wishlist);
   const [allWishlist, setAllwishlist] = useState([])
 
-  // Local state for wishlist management
-  // const [wishlistLocal, setWishlistLocal] = useState(
-  //   JSON.parse(localStorage.getItem("wishlist")) || []
-  // );
+  
   const dispatch = useDispatch();
 
-  // remove product from wishlist handler
-  // const handleRemoveFromWishlist = (id) => {
-  //   toast.success("Product removed from wishlist successfully");
-  //   dispatch(removeFromWishlist(id));
-  // };
-
-  // Update local cart state whenever the Redux cart state changes
-  // useEffect(() => {
-  //   setWishlistLocal(JSON.parse(localStorage.getItem("wishlist")));
-  // }, [wishlist.length]);
+ 
 
      useEffect(()=>{
           setAllwishlist(wishlist?.map((item)=> item?._id))

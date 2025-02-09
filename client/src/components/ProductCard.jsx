@@ -45,8 +45,6 @@ function ProductCard({ product }) {
     }
   }, []);
 
-  // Local state for wishlist management
-  //const [wishlist, setWishlist] = useState([]);
 
   //  // Fetch wishlist  when the component mounts
   useEffect(() => {
@@ -113,35 +111,9 @@ function ProductCard({ product }) {
       toast.error("Something went wrong! Try again.");
     }
   };
-  // Remove from cart handler,  remove product from cart and display success toast
-  // const handleRemoveFromCartBtn = (__id) => {
-  //   dispatch(removeFromCart(__id));  // Dispatch action to remove from Redux state
-  //   toast.success('Product removed from cart successfully');
-  // };
 
-  // Add to wishlist handler
-  // const handleAddToWishlistBtn = (product) => {
-  //   const updatedWishlist = [...wishlist, product];
-  //   setWishlist(updatedWishlist);
-  //   localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Save updated wishlist to localStorage
-  //   dispatch(addToWishlist(product));
-  //   toast.success("Product added to wishlist successfully");
-  // };
 
-  // // Remove from wishlist handler
-  // const handleRemoveFromWishlist = (_id) => {
-  //   const updatedWishlist = wishlist.filter((item) => item._id !== _id);
-  //   setWishlist(updatedWishlist);
-  //   l; //ocalStorage.setItem('wishlist', JSON.stringify(updatedWishlist));  // Update localStorage
-  //   dispatch(removeFromWishlist(_id));
-  //   toast.success("Product removed from wishlist successfully");
-  // };
 
-  // Sync cart with localStorage whenever the cart changes
-  // useEffect(() => {
-  //   //localStorage.setItem('cart', JSON.stringify(cart));  // Sync Redux cart state to localStorage
-
-  // }, [cart?.length]);  // Runs whenever the cart length changes
 
   return (
     <div
