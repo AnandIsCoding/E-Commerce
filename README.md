@@ -17,7 +17,7 @@ You can view the video demonstration of this project:
 [📽️ E-Commerce Website - Video Demo](https://www.loom.com/share/c1958e20f9a34087ac2f4c3f6f381b91?sid=c8f5df71-597b-4cda-b4df-25f6e90db7b6)
 
 You can view the Google Docs file, which includes a summary, useful links, etc.:  
-[📃 E-Commerce Website - Docs File](https://docs.google.com/document/d/1xDJTogeUi8fS2hVWYiwBRJoDAxBqJnL2/edit?usp=sharing&ouid=117885336231223452133&rtpof=true&sd=true)
+[📃 E-Commerce Website - Docs File](https://docs.google.com/document/d/1qJ2TIm_fy-pJ0yhjaQbvFDipEPO1Ako_/edit?usp=sharing&ouid=117885336231223452133&rtpof=true&sd=true)
 
 
 
